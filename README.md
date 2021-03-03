@@ -20,7 +20,7 @@ Each year, [Kaggle/Google Cloud host a competition](https://www.kaggle.com/c/men
 Interestingly, the first place model admits to getting "lucky" by manually overriding 3 first round predictions.  While other top submissions committed to a more programmatic approach, and taking data from kenpom.com for additional team stats.
 
 ## Data sources
-This [link](https://www.kaggle.com/c/mens-machine-learning-competition-2019/data) shares all of the data available for the 2019 competition.  We may pull in extra data sources later on if we feel like it will benefit our models.
+This [link](https://www.kaggle.com/c/ncaam-march-mania-2021/data) shares all of the data available for the 2021 competition.  We may pull in extra data sources later on if we feel like it will benefit our models.
 
 ## Simple model
 Let's try just using logistic regression on a few variables - this should work well for uneven matches where the victor should be obvious, but in the event the match appears to be more even, we may want to try something to account for the uncertainty.
