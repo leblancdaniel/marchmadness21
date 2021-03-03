@@ -15,9 +15,9 @@ Here's the inital plan...
 - Test new models on 2021 bracket
 
 ## Top models from 2019 competition
-Each year, [Kaggle hosts a competition](https://www.kaggle.com/c/mens-machine-learning-competition-2019) to come up with the best bracket prediction method.  The leaderboard ranking are sorted in ascending order by `log loss`.  In the 2019 competition, the 1st place received a log loss of `0.41477`, 5th place log loss was `0.43148`, and 10th place log loss was `0.43759`.  You can see the full 2019 leaderboard [here](https://www.kaggle.com/c/mens-machine-learning-competition-2019/leaderboard).
+Each year, Kaggle hosts a competition to come up with the best bracket prediction method.  The leaderboard ranking are sorted in ascending order by `log loss`.  In the 2019 competition, the 1st place received a log loss of `0.41477`, 5th place log loss was `0.43148`, and 10th place log loss was `0.43759`.  You can see the full 2019 leaderboard [here](https://www.kaggle.com/c/mens-machine-learning-competition-2019/leaderboard).
 
-Interestingly, the first place model admits to getting "lucky" by manually overriding 3 first round predictions.  While other top submissions committed to a more programmatic approach, and taking data from kenpom.com for additional team stats.
+Interestingly, the first place model admits to getting "lucky" by manually overriding 3 first round predictions.  While other top submissions committed to a more programmatic approach, and taking data from external sources for additional team stats.
 
 ## Data sources
 This [link](https://www.kaggle.com/c/ncaam-march-mania-2021/data) shares all of the data available for the 2021 competition, we've pulled this data into our `/data` directory.  We may pull in extra data sources later on if we feel like it will benefit our models.
