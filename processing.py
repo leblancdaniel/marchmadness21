@@ -72,4 +72,6 @@ def getWinRatio(team_id, n_years=35):
     losses = getNumLosses(team_id, n_years)
     return wins / (wins + losses)
 
+# TODO: Add other helper calculations (home win percentage, away win percentage)
+
 print(getWinRatio(1437, 1))
