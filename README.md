@@ -26,7 +26,7 @@ This [link](https://www.kaggle.com/c/ncaam-march-mania-2021/data) shares all of 
 Let's try just using logistic regression on a few variables - this should work well for uneven matches where the victor should be obvious, but in the event the match appears to be more even, we may want to try something to account for the uncertainty.
 
 ## Feature engineering (and extra data sources)
-List a few features that would be nice to add (efficiency, schedule difficulty, distance from home,)
+List a few features that would be nice to add (efficiency, schedule difficulty, distance from home, coach ratings,)
 
 ## Complex model(s)
 Maybe try some deep learning methods? Or grid search on a classifier model?
