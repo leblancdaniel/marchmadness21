@@ -14,8 +14,10 @@ for f in os.listdir(data_dir):
         data[df_name] = pd.read_csv(os.path.join(data_dir, f))
     else:
         continue
-# To access a DF in this dictionary of DF use format: data["df_name"]
+# List of dfs, for reference
+df_ls = []
 for df in data:
-    print(df)
-    print(data[df].head())
-    print()
+    df_ls.append(df)
+print(df_ls)
+# To access a DF in this dictionary of DF use format: data["df_name"]
+print(data)
