@@ -42,7 +42,7 @@ def getLastNChamps(team_id, n_years=35):
     return champions_ls.count(team_id)
 
 def getLastNFinalFour(team_id, n_years=35):
-    """ returns the number of championships won in the past n_years (default=35) for a TeamID """
+    """ returns the number of Final Four appearances in the past n_years (default=35) for a TeamID """
     ffour_df = data["mncaatourneycompactresults_df"][(data["mncaatourneycompactresults_df"]["DayNum"] == 152)]
     print(ffour_df)
     ffour_ls = ffour_df[(ffour_df["Season"] >= 2020 - n_years)]["WTeamID"].tolist()
@@ -50,12 +50,26 @@ def getLastNFinalFour(team_id, n_years=35):
     return ffour_ls.count(team_id)
 
 def getLastNEliteEight(team_id, n_years=35):
-    """ returns the number of championships won in the past n_years (default=35) for a TeamID """
+    """ returns the number of Elite Eight appearances in the past n_years (default=35) for a TeamID """
     eeight_df = data["mncaatourneycompactresults_df"][(data["mncaatourneycompactresults_df"]["DayNum"] == 145) | (data["mncaatourneycompactresults_df"]["DayNum"] == 146)]
     print(eeight_df)
     eeight_ls = eeight_df[(eeight_df["Season"] >= 2020 - n_years)]["WTeamID"].tolist()
     print(eeight_ls)
     return eeight_ls.count(team_id)
 
+def getNumWins(team_id, n_years=35):
+    """ returns the number of wins in the past n_years for a TeamID """
+    wins_df = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["WTeamID"] == team_id) & (data["mregularseasoncompactresults_df"]["Season"] > 2020 - n_years)]
+    return len(wins_df)
 
-print(getLastNEliteEight(1437, 5))
+def getNumLosses(team_id, n_years=35):
+    """ returns the number of losses in the past n_years for a TeamID """
+    loss_df = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["LTeamID"] == team_id) & (data["mregularseasoncompactresults_df"]["Season"] > 2020 - n_years)]
+    return len(loss_df)
+
+def getWinRatio(team_id, n_years=35):
+    wins = getNumWins(team_id, n_years)
+    losses = getNumLosses(team_id, n_years)
+    return wins / (wins + losses)
+
+print(getWinRatio(1437, 1))
