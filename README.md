@@ -1,5 +1,5 @@
 # marchmadness21
-A fun project attempting to make a perfect bracket.
+A fun project attempting to make a perfect bracket for the [2021 Kaggle Competition](https://www.kaggle.com/c/ncaam-march-mania-2021/data)!!!
 
 Here's the inital plan...  
 - Gather a few benchmarks from leaderboards from 2 years ago
