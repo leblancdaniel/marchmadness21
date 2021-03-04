@@ -223,15 +223,11 @@ def generateTrainingData(years):
                 d = dict(zip(col_ls, negative_diff))
                 rows_list.append(d)
             counter += 1
+
     train = pd.DataFrame(rows_list)
-    scaler = preprocessing.StandardScaler()
-    train_scaled = scaler.fit_transform(train)
-    train_scaled = pd.DataFrame(train_scaled, columns=train.columns)
-
     train.to_csv("training_data.csv", index=False)
-    train_scaled.to_csv("training_data.csv", index=False)
 
-    return train_scaled
+    return train
 
 print(generateTrainingData(range(2002, 2022)))   
 
