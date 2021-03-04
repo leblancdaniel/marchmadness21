@@ -1,0 +1,454 @@
+CityID,City,State,citystate,dist_to_indy
+4001,Abilene,TX,"Abilene, TX",1656848.0
+4002,Akron,OH,"Akron, OH",480640.0
+4003,Albany,NY,"Albany, NY",1260049.0
+4004,Albuquerque,NM,"Albuquerque, NM",2063595.0
+4005,Allentown,PA,"Allentown, PA",1001132.0
+4006,Ames,IA,"Ames, IA",784826.0
+4007,Amherst,MA,"Amherst, MA",1414771.0
+4008,Anaheim,CA,"Anaheim, CA",3315221.0
+4009,Anchorage,AK,"Anchorage, AK",6048645.0
+4010,Ann Arbor,MI,"Ann Arbor, MI",428289.0
+4011,Annapolis,MD,"Annapolis, MD",990858.0
+4012,Arlington,TX,"Arlington, TX",1479404.0
+4013,Asheville,NC,"Asheville, NC",757309.0
+4014,Athens,GA,"Athens, GA",971038.0
+4015,Athens,OH,"Athens, OH",400000
+4016,Atlanta,GA,"Atlanta, GA",860038.0
+4017,Atlantic City,NJ,"Atlantic City, NJ",1132919.0
+4018,Auburn,AL,"Auburn, AL",950607.0
+4019,Auburn Hills,MI,"Auburn Hills, MI",512549.0
+4020,Austin,TX,"Austin, TX",1760426.0
+4021,Bakersfield,CA,"Bakersfield, CA",3351215.0
+4022,Baltimore,MD,"Baltimore, MD",956347.0
+4023,Bangor,ME,"Bangor, ME",1871223.0
+4024,Baton Rouge,LA,"Baton Rouge, LA",1361885.0
+4025,Bayamon,PR,"Bayamon, PR",1000000
+4026,Beaumont,TX,"Beaumont, TX",1655584.0
+4027,Berkeley,CA,"Berkeley, CA",3633821.0
+4028,Bethlehem,PA,"Bethlehem, PA",1010000
+4029,Billings,MT,"Billings, MT",2264885.0
+4030,Birmingham,AL,"Birmingham, AL",771128.0
+4031,Blacksburg,VA,"Blacksburg, VA",722695.0
+4032,Bloomington,IN,"Bloomington, IN",89069.0
+4033,Boca Raton,FL,"Boca Raton, FL",1860016.0
+4034,Boiling Springs,NC,"Boiling Springs, NC",838675.0
+4035,Boise,ID,"Boise, ID",2950777.0
+4036,Boone,NC,"Boone, NC",739395.0
+4037,Borinquen,PR,"Borinquen, PR",1912911.0
+4038,Bossier City,LA,"Bossier City, LA",1278132.0
+4039,Boston,MA,"Boston, MA",1505797.0
+4040,Boulder,CO,"Boulder, CO",1775042.0
+4041,Bowling Green,KY,"Bowling Green, KY",343764.0
+4042,Bowling Green,OH,"Bowling Green, OH",343764.0
+4043,Bozeman,MT,"Bozeman, MT",2493409.0
+4044,Bridgeport,CT,"Bridgeport, CT",1275396.0
+4045,Bronx,NY,"Bronx, NY",1191314.0
+4046,Brookings,SD,"Brookings, SD",1296187.0
+4047,Brooklyn,NY,"Brooklyn, NY",1145692.0
+4048,Brooklyn Heights,NY,"Brooklyn Heights, NY",1173355.0
+4049,Buffalo,NY,"Buffalo, NY",802386.0
+4050,Buies Creek,NC,"Buies Creek, NC",1024364.0
+4051,Burlington,VT,"Burlington, VT",1018909.0
+4052,Cambridge,MA,"Cambridge, MA",1501000
+4053,Cancun,MX,"Cancun, MX",4469971.0
+4054,Cape Girardeau,MO,"Cape Girardeau, MO",489857.0
+4055,Carbondale,IL,"Carbondale, IL",424072.0
+4056,Casper,WY,"Casper, WY",778115.0
+4057,Cedar City,UT,"Cedar City, UT",2671633.0
+4058,Cedar Falls,IA,"Cedar Falls, IA",720990.0
+4059,Cedar Park,TX,"Cedar Park, TX",1750815.0
+4060,Champaign,IL,"Champaign, IL",196558.0
+4061,Chapel Hill,NC,"Chapel Hill, NC",970794.0
+4062,Charleston,IL,"Charleston, IL",1170463.0
+4063,Charleston,NC,"Charleston, NC",1170463.0
+4064,Charleston,SC,"Charleston, SC",1170463.0
+4065,Charleston,WV,"Charleston, WV",1170463.0
+4066,Charlotte,NC,"Charlotte, NC",942351.0
+4067,Charlottesville,VA,"Charlottesville, VA",900323.0
+4068,Chattanooga,TN,"Chattanooga, TN",674760.0
+4069,Cheney,WA,"Cheney, WA",1130424.0
+4070,Chestnut Hill,MA,"Chestnut Hill, MA",1025352.0
+4071,Chicago,IL,"Chicago, IL",298272.0
+4072,Cincinnati,OH,"Cincinnati, OH",180606.0
+4073,Clarksville,TN,"Clarksville, TN",448892.0
+4074,Clemson,SC,"Clemson, SC",881936.0
+4075,Cleveland,OH,"Cleveland, OH",507105.0
+4076,Clinton,SC,"Clinton, SC",936126.0
+4077,College Park,MD,"College Park, MD",876165.0
+4078,College Station,TX,"College Station, TX",1601017.0
+4079,Columbia,SC,"Columbia, SC",577725.0
+4080,Columbus,OH,"Columbus, OH",282561.0
+4081,Conway,AR,"Conway, AR",924887.0
+4082,Conway,SC,"Conway, SC",924887.0
+4083,Cookeville,TN,"Cookeville, TN",458242.0
+4084,Coral Gables,FL,"Coral Gables, FL",1932123.0
+4085,Corpus Christi,TX,"Corpus Christi, TX",1967315.0
+4086,Corvallis,OR,"Corvallis, OR",3660725.0
+4087,Cullowhee,NC,"Cullowhee, NC",766352.0
+4088,Dallas,TX,"Dallas, TX",1446712.0
+4089,Davidson,NC,"Davidson, NC",895109.0
+4090,Davis,CA,"Davis, CA",3533523.0
+4091,Dayton,OH,"Dayton, OH",188057.0
+4092,Daytona Beach,FL,"Daytona Beach, FL",1555627.0
+4093,DeKalb,IL,"DeKalb, IL",385553.0
+4094,DeLand,FL,"DeLand, FL",1536914.0
+4095,Denton,TX,"Denton, TX",1452873.0
+4096,Denver,CO,"Denver, CO",1745660.0
+4097,Des Moines,IA,"Des Moines, IA",760924.0
+4098,Detroit,MI,"Detroit, MI",462149.0
+4099,Dover,DE,"Dover, DE",1089000
+4100,Duluth,GA,"Duluth, GA",561894.0
+4101,Durham,NC,"Durham, NC",976033.0
+4102,Durham,NH,"Durham, NH",976033.0
+4103,East Lansing,MI,"East Lansing, MI",416383.0
+4104,East Rutherford,NJ,"East Rutherford, NJ",1172134.0
+4105,Easton,PA,"Easton, PA",295865.0
+4106,Edinburg,TX,"Edinburg, TX",2244974.0
+4107,Edwardsville,IL,"Edwardsville, IL",362264.0
+4108,El Paso,TX,"El Paso, TX",2340716.0
+4109,Elon,NC,"Elon, NC",920420.0
+4110,Emmitsburg,MD,"Emmitsburg, MD",886151.0
+4111,Estero,FL,"Estero, FL",1812926.0
+4112,Eugene,OR,"Eugene, OR",3672664.0
+4113,Evanston,IL,"Evanston, IL",326719.0
+4114,Evansville,IN,"Evansville, IN",284481.0
+4115,Fairfax,VA,"Fairfax, VA",954674.0
+4116,Fairfield,CT,"Fairfield, CT",1267909.0
+4117,Fargo,ND,"Fargo, ND",1329290.0
+4118,Farmville,VA,"Farmville, VA",940770.0
+4119,Fayetteville,AR,"Fayetteville, AR",1039002.0
+4120,Flagstaff,AZ,"Flagstaff, AZ",2577934.0
+4121,Fort Collins,CO,"Fort Collins, CO",1831211.0
+4122,Fort Hood,TX,"Fort Hood, TX",1698213.0
+4123,Fort Myers,FL,"Fort Myers, FL",1784078.0
+4124,Fort Wayne,IN,"Fort Wayne, IN",202918.0
+4125,Fort Worth,TX,"Fort Worth, TX",1497258.0
+4126,Fresno,CA,"Fresno, CA",3527595.0
+4127,Fullerton,CA,"Fullerton, CA",3311521.0
+4128,Gainesville,FL,"Gainesville, FL",1392707.0
+4129,Garland,TX,"Garland, TX",1441428.0
+4130,Glendale,AZ,"Glendale, AZ",3322785.0
+4131,Glens Falls,NY,"Glens Falls, NY",1281601.0
+4132,Grambling,LA,"Grambling, LA",1214658.0
+4133,Grand Forks,ND,"Grand Forks, ND",1457392.0
+4134,Greeley,CO,"Greeley, CO",1796048.0
+4135,Green Bay,WI,"Green Bay, WI",636065.0
+4136,Greensboro,NC,"Greensboro, NC",892950.0
+4137,Greenville,MS,"Greenville, MS",840986.0
+4138,Greenville,NC,"Greenville, NC",840986.0
+4139,Greenville,SC,"Greenville, SC",840986.0
+4140,Greenwood,MS,"Greenwood, MS",1022379.0
+4141,Gulfport,MS,"Gulfport, MS",1256882.0
+4142,Hackensack,NJ,"Hackensack, NJ",1175027.0
+4143,Hamden,CT,"Hamden, CT",1309589.0
+4144,Hamilton,NY,"Hamilton, NY",974673.0
+4145,Hammond,LA,"Hammond, LA",253968.0
+4146,Hampton,VA,"Hampton, VA",1131704.0
+4147,Hanover,NH,"Hanover, NH",1467000
+4148,Harrisonburg,VA,"Harrisonburg, VA",884260.0
+4149,Hartford,CT,"Hartford, CT",1344089.0
+4150,Hattiesburg,MS,"Hattiesburg, MS",1141459.0
+4151,Hempstead,NY,"Hempstead, NY",1208147.0
+4152,High Point,NC,"High Point, NC",878741.0
+4153,Highland Heights,KY,"Highland Heights, KY",522425.0
+4154,Hoffman Estates,IL,"Hoffman Estates, IL",347514.0
+4155,Honolulu,HI,"Honolulu, HI",10000000
+4156,Hot Springs,AR,"Hot Springs, AR",1021310.0
+4157,Houston,TX,"Houston, TX",1631899.0
+4158,Huntington,WV,"Huntington, WV",1055651.0
+4159,Huntsville,AL,"Huntsville, AL",640505.0
+4160,Huntsville,TX,"Huntsville, TX",640505.0
+4161,Indianapolis,IN,"Indianapolis, IN",0.0
+4162,Iowa City,IA,"Iowa City, IA",581132.0
+4163,Irvine,CA,"Irvine, CA",3321413.0
+4164,Ithaca,NY,"Ithaca, NY",1028112.0
+4165,Itta Bena,MS,"Itta Bena, MS",747926.0
+4166,Jackson,MS,"Jackson, MS",949306.0
+4167,Jacksonville,AL,"Jacksonville, AL",1416024.0
+4168,Jacksonville,FL,"Jacksonville, FL",1416024.0
+4169,Jersey City,NJ,"Jersey City, NJ",1136037.0
+4170,Johnson City,TN,"Johnson City, TN",675417.0
+4171,Johnstown,PA,"Johnstown, PA",688035.0
+4172,Jonesboro,AR,"Jonesboro, AR",713790.0
+4173,Kalamazoo,MI,"Kalamazoo, MI",371176.0
+4174,Kansas City,MO,"Kansas City, MO",776042.0
+4175,Katy,TX,"Katy, TX",1675870.0
+4176,Kennesaw,GA,"Kennesaw, GA",822262.0
+4177,Kent,OH,"Kent, OH",499028.0
+4178,Kent,WA,"Kent, WA",499028.0
+4179,Kingston,RI,"Kingston, RI",1243712.0
+4180,Knoxville,TN,"Knoxville, TN",574969.0
+4181,Lafayette,LA,"Lafayette, LA",1764908.0
+4182,Lahaina,HI,"Lahaina, HI",10000000
+4183,Lake Buena Vista,FL,"Lake Buena Vista, FL",1577564.0
+4184,Lake Charles,LA,"Lake Charles, LA",1563665.0
+4185,Lakeland,FL,"Lakeland, FL",1580531.0
+4186,Laramie,WY,"Laramie, WY",1848582.0
+4187,Las Cruces,NM,"Las Cruces, NM",2269877.0
+4188,Las Vegas,NV,"Las Vegas, NV",2945517.0
+4189,Lawrence,KS,"Lawrence, KS",838286.0
+4190,Lawrenceville,NJ,"Lawrenceville, NJ",1077298.0
+4191,Lewisburg,PA,"Lewisburg, PA",915414.0
+4192,Lewiston,NY,"Lewiston, NY",1716156.0
+4193,Lexington,KY,"Lexington, KY",304612.0
+4194,Lexington,VA,"Lexington, VA",304612.0
+4195,Lincoln,NE,"Lincoln, NE",978920.0
+4196,Little Rock,AR,"Little Rock, AR",939879.0
+4197,Logan,UT,"Logan, UT",1508705.0
+4198,Long Beach,CA,"Long Beach, CA",3345989.0
+4199,Loretto,PA,"Loretto, PA",841080.0
+4200,Lorman,MS,"Lorman, MS",814234.0
+4201,Los Angeles,CA,"Los Angeles, CA",3325405.0
+4202,Loudonville,NY,"Loudonville, NY",405626.0
+4203,Louisville,KY,"Louisville, KY",182779.0
+4204,Lowell,MA,"Lowell, MA",1509539.0
+4205,Lubbock,TX,"Lubbock, TX",1748174.0
+4206,Lynchburg,VA,"Lynchburg, VA",865402.0
+4207,Macomb,IL,"Macomb, IL",518004.0
+4208,Macon,GA,"Macon, GA",993680.0
+4209,Madison,WI,"Madison, WI",531720.0
+4210,Malibu,CA,"Malibu, CA",3379544.0
+4211,Manhattan,KS,"Manhattan, KS",1147536.0
+4212,Martin,TN,"Martin, TN",977858.0
+4213,Memphis,TN,"Memphis, TN",747056.0
+4214,Miami,FL,"Miami, FL",1927832.0
+4215,Milwaukee,WI,"Milwaukee, WI",449515.0
+4216,Minneapolis,MN,"Minneapolis, MN",951225.0
+4217,Missoula,MT,"Missoula, MT",2817122.0
+4218,Mobile,AL,"Mobile, AL",1181000
+4219,Monroe,LA,"Monroe, LA",3593342.0
+4220,Montgomery,AL,"Montgomery, AL",913343.0
+4221,Moon Township,PA,"Moon Township, PA",568161.0
+4222,Moraga,CA,"Moraga, CA",3636151.0
+4223,Morehead,KY,"Morehead, KY",347719.0
+4224,Morgantown,WV,"Morgantown, WV",610365.0
+4225,Moscow,ID,"Moscow, ID",3217000
+4226,Mt. Pleasant,MI,"Mt. Pleasant, MI",1176283.0
+4227,Muncie,IN,"Muncie, IN",99381.0
+4228,Murfreesboro,TN,"Murfreesboro, TN",513319.0
+4229,Murray,KY,"Murray, KY",498332.0
+4230,Myrtle Beach,SC,"Myrtle Beach, SC",1232367.0
+4231,Nacogdoches,TX,"Nacogdoches, TX",1405853.0
+4232,Nampa,ID,"Nampa, ID",2977053.0
+4233,Nashville,TN,"Nashville, TN",464656.0
+4234,Natchitoches,LA,"Natchitoches, LA",1319751.0
+4235,New Britain,CT,"New Britain, CT",1329807.0
+4236,New Haven,CT,"New Haven, CT",1307039.0
+4237,New Orleans,LA,"New Orleans, LA",1318267.0
+4238,New Rochelle,NY,"New Rochelle, NY",1206369.0
+4239,New York,NY,"New York, NY",1139294.0
+4240,Newark,DE,"Newark, DE",1124029.0
+4241,Newark,NJ,"Newark, NJ",1124029.0
+4242,Niagara Falls,NY,"Niagara Falls, NY",839672.0
+4243,Niceville,FL,"Niceville, FL",1161939.0
+4244,Norfolk,VA,"Norfolk, VA",1158657.0
+4245,Normal,AL,"Normal, AL",278255.0
+4246,Normal,IL,"Normal, IL",278255.0
+4247,Norman,OK,"Norman, OK",1216655.0
+4248,North Little Rock,AR,"North Little Rock, AR",933446.0
+4249,Northridge,CA,"Northridge, CA",3359629.0
+4250,Notre Dame,IN,"Notre Dame, IN",995191.0
+4251,Oakland,CA,"Oakland, CA",3640845.0
+4252,Oakland City,IN,"Oakland City, IN",231465.0
+4253,Ogden,UT,"Ogden, UT",2466415.0
+4254,Oklahoma City,OK,"Oklahoma City, OK",1191222.0
+4255,Omaha,NE,"Omaha, NE",976633.0
+4256,Orangeburg,SC,"Orangeburg, SC",1055130.0
+4257,Orem,UT,"Orem, UT",2497823.0
+4258,Orlando,FL,"Orlando, FL",1564170.0
+4259,Orono,ME,"Orono, ME",1883753.0
+4260,Oxford,MS,"Oxford, MS",879873.0
+4261,Oxford,OH,"Oxford, OH",879873.0
+4262,Paradise,NV,"Paradise, NV",3749954.0
+4263,Paradise Island,BA,"Paradise Island, BA",10000000
+4264,Pearl Harbor-Hickam,HI,"Pearl Harbor-Hickam, HI",10000000
+4265,Peoria,IL,"Peoria, IL",336170.0
+4266,Philadelphia,PA,"Philadelphia, PA",1035283.0
+4267,Phoenix,AZ,"Phoenix, AZ",2733714.0
+4268,Pine Bluff,AR,"Pine Bluff, AR",951318.0
+4269,Piscataway,NJ,"Piscataway, NJ",1101951.0
+4270,Pittsburgh,PA,"Pittsburgh, PA",578577.0
+4271,Playa del Carmen,MX,"Playa del Carmen, MX",4454862.0
+4272,Pocatello,ID,"Pocatello, ID",2574270.0
+4273,Portland,ME,"Portland, ME",3643184.0
+4274,Portland,OR,"Portland, OR",3643184.0
+4275,Poughkeepsie,NY,"Poughkeepsie, NY",1219490.0
+4276,Prairie View,TX,"Prairie View, TX",1671780.0
+4277,Presbyterian,SC,"Presbyterian, SC",976661.0
+4278,Prescott Valley,AZ,"Prescott Valley, AZ",2716419.0
+4279,Princess Anne,MD,"Princess Anne, MD",1156916.0
+4280,Princeton,NJ,"Princeton, NJ",1082960.0
+4281,Providence,RI,"Providence, RI",895281.0
+4282,Provo,UT,"Provo, UT",2501688.0
+4283,Puerto Vallarta,MX,"Puerto Vallarta, MX",3467008.0
+4284,Pullman,WA,"Pullman, WA",3224429.0
+4285,Queens,NY,"Queens, NY",1209412.0
+4286,Radford,VA,"Radford, VA",730532.0
+4287,Raleigh,NC,"Raleigh, NC",1013037.0
+4288,Ramstein-Miesenbach,GY,"Ramstein-Miesenbach, GY",10000000
+4289,Rapid City,SD,"Rapid City, SD",1761420.0
+4290,Reno,NV,"Reno, NV",3299873.0
+4291,Richmond,KY,"Richmond, KY",1009819.0
+4292,Richmond,VA,"Richmond, VA",1009819.0
+4293,Riverdale,NY,"Riverdale, NY",1121439.0
+4294,Riverside,CA,"Riverside, CA",3270440.0
+4295,Rochester,MI,"Rochester, MI",914234.0
+4296,Rochester,NY,"Rochester, NY",914234.0
+4297,Rock Hill,SC,"Rock Hill, SC",948390.0
+4298,Rosemont,IL,"Rosemont, IL",329467.0
+4299,Ruston,LA,"Ruston, LA",1207613.0
+4300,Sacramento,CA,"Sacramento, CA",3511072.0
+4301,Salt Lake City,UT,"Salt Lake City, UT",2475726.0
+4302,San Antonio,TX,"San Antonio, TX",1886526.0
+4303,San Diego,CA,"San Diego, CA",3298945.0
+4304,San Francisco,CA,"San Francisco, CA",3650254.0
+4305,San Jose,CA,"San Jose, CA",3701872.0
+4307,San Juan,PR,"San Juan, PR",5000000
+4308,San Luis Obispo,CA,"San Luis Obispo, CA",3571532.0
+4309,San Marcos,TX,"San Marcos, TX",1808380.0
+4310,Santa Barbara,CA,"Santa Barbara, CA",3468230.0
+4311,Santa Clara,CA,"Santa Clara, CA",3700774.0
+4312,Savannah,GA,"Savannah, GA",1258764.0
+4313,Seattle,WA,"Seattle, WA",3581319.0
+4314,Shanghai,CH,"Shanghai, CH",10000000
+4315,Shreveport,LA,"Shreveport, LA",1275475.0
+4316,Sioux Falls,SD,"Sioux Falls, SD",1187906.0
+4317,Smithfield,RI,"Smithfield, RI",1093250.0
+4318,South Bend,IN,"South Bend, IN",236763.0
+4319,South Korea,SK,"South Korea, SK",10000000
+4320,South Orange,NJ,"South Orange, NJ",1115808.0
+4321,South Padre Island,TX,"South Padre Island, TX",2231963.0
+4322,Southaven,MS,"Southaven, MS",767217.0
+4323,Spartanburg,SC,"Spartanburg, SC",852701.0
+4324,Spokane,WA,"Spokane, WA",3134502.0
+4325,Springfield,IL,"Springfield, IL",1393190.0
+4326,Springfield,MA,"Springfield, MA",1393190.0
+4327,Springfield,MO,"Springfield, MO",1393190.0
+4328,St. Bonaventure,NY,"St. Bonaventure, NY",807613.0
+4329,St. Louis,MO,"St. Louis, MO",391065.0
+4330,St. Thomas,VI,"St. Thomas, VI",10000000
+4331,Stanford,CA,"Stanford, CA",3703019.0
+4332,Starkville,MS,"Starkville, MS",916898.0
+4333,Staten Island,NY,"Staten Island, NY",1146006.0
+4334,Statesboro,GA,"Statesboro, GA",1195512.0
+4335,Stillwater,OK,"Stillwater, OK",921904.0
+4336,Stockton,CA,"Stockton, CA",3587494.0
+4337,Stony Brook,NY,"Stony Brook, NY",1080130.0
+4338,Storrs,CT,"Storrs, CT",1386715.0
+4339,Sunrise,FL,"Sunrise, FL",1882740.0
+4340,Syracuse,NY,"Syracuse, NY",1037243.0
+4341,Tallahassee,FL,"Tallahassee, FL",1251355.0
+4342,Tampa,FL,"Tampa, FL",1593651.0
+4343,Tempe,AZ,"Tempe, AZ",2718004.0
+4344,Terre Haute,IN,"Terre Haute, IN",124083.0
+4345,Thibodaux,LA,"Thibodaux, LA",1407773.0
+4346,Toledo,OH,"Toledo, OH",359234.0
+4347,Tortola,VI,"Tortola, VI",10000000
+4348,Towson,MD,"Towson, MD",961760.0
+4349,Troy,AL,"Troy, AL",497445.0
+4350,Tucson,AZ,"Tucson, AZ",2722097.0
+4351,Tulsa,OK,"Tulsa, OK",1022590.0
+4352,Tupelo,MS,"Tupelo, MS",811350.0
+4353,Tuscaloosa,AL,"Tuscaloosa, AL",859891.0
+4354,Uncasville,CT,"Uncasville, CT",1382320.0
+4355,University Park,PA,"University Park, PA",1456145.0
+4356,USAF Academy,CO,"USAF Academy, CO",1713082.0
+4357,Valparaiso,IN,"Valparaiso, IN",241290.0
+4358,Vancouver,BC,"Vancouver, BC",3799584.0
+4359,Vermillion,SD,"Vermillion, SD",1108424.0
+4360,Vestal,NY,"Vestal, NY",1064971.0
+4361,Villanova,PA,"Villanova, PA",1017712.0
+4362,Waco,TX,"Waco, TX",1598872.0
+4363,Washington,DC,"Washington, DC",3467185.0
+4364,West Hartford,CT,"West Hartford, CT",1338513.0
+4365,West Lafayette,IN,"West Lafayette, IN",104667.0
+4366,West Long Branch,NJ,"West Long Branch, NJ",1147140.0
+4367,West Point,NY,"West Point, NY",1209182.0
+4368,Wichita,KS,"Wichita, KS",1087391.0
+4369,Williamsburg,VA,"Williamsburg, VA",1091309.0
+4370,Wilmington,NC,"Wilmington, NC",1220309.0
+4371,Winston-Salem,NC,"Winston-Salem, NC",848757.0
+4372,Worcester,MA,"Worcester, MA",1444426.0
+4373,Youngstown,OH,"Youngstown, OH",556496.0
+4374,Ypsilanti,MI,"Ypsilanti, MI",426647.0
+4376,Biloxi,MS,"Biloxi, MS",1276667.0
+4382,Freeport,BA,"Freeport, BA",477589.0
+4383,Guaynabo,PR,"Guaynabo, PR",5000000
+4385,Laie,HI,"Laie, HI",10000000
+4387,Moline,IL,"Moline, IL",485121.0
+4389,New York City,NY,"New York City, NY",1139294.0
+4390,North Charleston,SC,"North Charleston, SC",1156314.0
+4391,Ocala,FL,"Ocala, FL",1445728.0
+4392,Panama City,FL,"Panama City, FL",1195614.0
+4396,St. Charles,MO,"St. Charles, MO",414619.0
+4399,Trujillo Alto,PR,"Trujillo Alto, PR",5000000
+4402,Upper Marlboro,MD,"Upper Marlboro, MD",981312.0
+4403,Wailuku,HI,"Wailuku, HI",10000000
+4404,Winter Park,FL,"Winter Park, FL",1847605.0
+4406,Garden City,NY,"Garden City, NY",458976.0
+4407,Great Falls,MT,"Great Falls, MT",944847.0
+4408,Reading,PA,"Reading, PA",1519683.0
+4409,Uniondale,NY,"Uniondale, NY",1209368.0
+4410,Belfast,IR,"Belfast, IR",10000000
+4412,Montego Bay,JA,"Montego Bay, JA",5000000
+4413,Nassau,BA,"Nassau, BA",10000000
+4414,Frisco,TX,"Frisco, TX",1380650.0
+4415,Grand Cayman,CI,"Grand Cayman, CI",10000000
+4416,Miami Shores,FL,"Miami Shores, FL",1915042.0
+4417,Midland,MI,"Midland, MI",840692.0
+4421,Alexandria,LA,"Alexandria, LA",959884.0
+4422,Bimini,BA,"Bimini, BA",10000000
+4423,Bloomington,IL,"Bloomington, IL",89069.0
+4424,Carolina,PR,"Carolina, PR",1916419.0
+4425,Clarksdale,MS,"Clarksdale, MS",865114.0
+4426,Cupertino,CA,"Cupertino, CA",3709729.0
+4427,Davie,FL,"Davie, FL",1894833.0
+4428,East Peoria,IL,"East Peoria, IL",333391.0
+4429,Fort Lauderdale,FL,"Fort Lauderdale, FL",1890264.0
+4430,Fort Mill,SC,"Fort Mill, SC",957918.0
+4431,Grand Rapids,MI,"Grand Rapids, MI",423513.0
+4432,Hilo,HI,"Hilo, HI",10000000
+4433,Houma,LA,"Houma, LA",1404091.0
+4434,Jennings,LA,"Jennings, LA",1084528.0
+4435,Kennewick,WA,"Kennewick, WA",3356465.0
+4436,Livonia,MI,"Livonia, MI",462465.0
+4437,Lucaya,BA,"Lucaya, BA",10000000
+4438,Melbourne,FL,"Melbourne, FL",1677000
+4439,Moorehead,MS,"Moorehead, MS",1326018.0
+4440,Mt. Pleasant,SC,"Mt. Pleasant, SC",1176283.0
+4441,Niagara University,NY,"Niagara University, NY",842955.0
+4442,Toronto,ON,"Toronto, ON",830154.0
+4443,West Palm Beach,FL,"West Palm Beach, FL",1822108.0
+4444,Florence,AL,"Florence, AL",674000
+4445,Georgetown,KY,"Georgetown, KY",943055.0
+4446,Seaside,CA,"Seaside, CA",1166917.0
+4447,Kissimmee,FL,"Kissimmee, FL",1583562.0
+4448,Oakland,MI,"Oakland, MI",3640845.0
+4449,St. Petersburg,FL,"St. Petersburg, FL",1629774.0
+4450,Berea,KY,"Berea, KY",362207.0
+4451,Chatham,ON,"Chatham, ON",1613590.0
+4452,Kahului,HI,"Kahului, HI",10000000
+4453,La Crosse,WI,"La Crosse, WI",747324.0
+4454,Maui,HI,"Maui, HI",10000000
+4455,West Orange,NJ,"West Orange, NJ",1155567.0
+4456,White Plains,NY,"White Plains, NY",1217192.0
+4457,Winter Garden,FL,"Winter Garden, FL",1543690.0
+4458,Homewood,AL,"Homewood, AL",3382935.0
+4459,Isla Vista,CA,"Isla Vista, CA",3486926.0
+4460,Mansfield,CT,"Mansfield, CT",1498231.0
+4461,Montville,CT,"Montville, CT",1146193.0
+4462,North Andover,MA,"North Andover, MA",1525589.0
+4463,Columbia,MO,"Columbia, MO",577725.0
+4464,Lawrence Township,NJ,"Lawrence Township, NJ",25691.0
+4465,Olean,NY,"Olean, NY",810505.0
+4466,Fairborn,OH,"Fairborn, OH",195404.0
+4467,Bryn Mawr,PA,"Bryn Mawr, PA",1020030.0
+4468,Moon,PA,"Moon, PA",1028948.0
+4469,South Kingstown,RI,"South Kingstown, RI",1438943.0
+4470,Springfield,OH,"Springfield, OH",1393190.0
+4471,Midland,TX,"Midland, TX",840692.0
+4472,Riviera Maya,MX,"Riviera Maya, MX",4466806.0
+4473,St. James,JA,"St. James, JA",963646.0
+4474,Victoria,BC,"Victoria, BC",1832860.0
+4475,Wilmington,DE,"Wilmington, DE",1220309.0

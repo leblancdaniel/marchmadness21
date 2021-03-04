@@ -5,7 +5,7 @@ Here's the inital plan...
 - ~~Gather a few benchmarks from leaderboards from 2 years ago~~
 - ~~Gather data from 2019 Kaggle competition~~
 - Create REALLY simple model to predict win probability
-- Engineer a bunch of new interesting features and use another simple model
+- ~~Engineer a bunch of new interesting features and use another simple model~~
 - Using the new features, create a more complex model
 - Reduce dimensionality (PCA, etc.) and create another model
 - Test & compare results on 2019 data
@@ -23,6 +23,8 @@ Interestingly, the first place model admits to getting "lucky" by manually overr
 This [link](https://www.kaggle.com/c/ncaam-march-mania-2021/data) shares all of the data available for the 2021 competition, we've pulled this data into our `/data` directory.  
 
 We also scraped data from [kenpom.com](kenpom.com) and put that in the `/data` directory.  Because of some naming differences of schools, we did a little extra work to ensure we could connect each schools data in the `MTeamSpellings.csv` file.
+
+We added in the distance from the tournament location (Indianapolis) using the Google Places Distance Matrix API as a feature, too.  The thinking here is that even though the tournament is in a neutral location, if my fanbase is much closer to Indy than yours, more of my fans will show up and give me a pseudo-home-advantage.
 
 In order to build a new training dataset - just run `processing.py`.
 
