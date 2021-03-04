@@ -2,8 +2,8 @@
 A fun project attempting to make a perfect bracket for the [2021 Kaggle Competition](https://www.kaggle.com/c/ncaam-march-mania-2021/data)!!!
 
 Here's the inital plan...  
-- Gather a few benchmarks from leaderboards from 2 years ago
-- Gather data from 2019 Kaggle competition
+- ~~Gather a few benchmarks from leaderboards from 2 years ago~~
+- ~~Gather data from 2019 Kaggle competition~~
 - Create REALLY simple model to predict win probability
 - Engineer a bunch of new interesting features and use another simple model
 - Using the new features, create a more complex model
@@ -20,7 +20,9 @@ Each year, Kaggle hosts a competition to come up with the best bracket predictio
 Interestingly, the first place model admits to getting "lucky" by manually overriding 3 first round predictions.  While other top submissions committed to a more programmatic approach, and taking data from external sources for additional team stats.
 
 ## Data sources
-This [link](https://www.kaggle.com/c/ncaam-march-mania-2021/data) shares all of the data available for the 2021 competition, we've pulled this data into our `/data` directory.  We may pull in extra data sources later on if we feel like it will benefit our models.
+This [link](https://www.kaggle.com/c/ncaam-march-mania-2021/data) shares all of the data available for the 2021 competition, we've pulled this data into our `/data` directory.  
+
+We also scraped data from [kenpom.com](kenpom.com) and put that in the `/data` directory.  Because of some naming differences of schools, we did a little extra work to ensure we could connect each schools data in the `MTeamSpellings.csv` file.
 
 ## Simple model
 Let's try just using logistic regression on a few variables - this should work well for uneven matches where the victor should be obvious, but in the event the match appears to be more even, we may want to try something to account for the uncertainty.
