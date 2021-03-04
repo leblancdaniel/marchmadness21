@@ -24,6 +24,8 @@ This [link](https://www.kaggle.com/c/ncaam-march-mania-2021/data) shares all of 
 
 We also scraped data from [kenpom.com](kenpom.com) and put that in the `/data` directory.  Because of some naming differences of schools, we did a little extra work to ensure we could connect each schools data in the `MTeamSpellings.csv` file.
 
+In order to build a new training dataset - just run `processing.py`.
+
 ## Simple model
 Let's try just using logistic regression on a few variables - this should work well for uneven matches where the victor should be obvious, but in the event the match appears to be more even, we may want to try something to account for the uncertainty.
 

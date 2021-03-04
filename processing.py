@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np 
 import os 
 from string import digits
+from scipy import stats
+from sklearn import preprocessing
 
 current_dir = os.path.dirname(__file__)
 data_dir = os.path.join(current_dir, "data")
@@ -17,7 +19,7 @@ for f in os.listdir(data_dir):
 kenpom_df = pd.read_csv(os.path.join(data_dir, "kenpom.csv"))
 # Assign Team ID to kenpom data
 kenpom_df["name"] = kenpom_df["name"].str.lower()
-kenpom_df["name"] = kenpom_df["name"].str.replace("*", "")
+kenpom_df["name"] = kenpom_df["name"].str.replace("*", "", regex=True)
 kenpom_df["name"] = kenpom_df["name"].str.translate({ord(k): None for k in digits})
 kenpom_df["name"] = kenpom_df["name"].str.strip()
 kenpom_df = pd.merge(kenpom_df, data["mteamspellings_df"], how="left", left_on="name", right_on="TeamNameSpelling")
@@ -74,7 +76,10 @@ def getWinPct(team_id, year, n_years=35):
     """ returns total win percentage """
     wins = getNumWins(team_id, year, n_years)
     losses = getNumLosses(team_id, year, n_years)
-    return wins / (wins + losses)
+    if wins + losses == 0:
+        return np.nan
+    else:
+        return wins / (wins + losses)
 
 def getHomeWinPct(team_id, year, n_years=35):
     """ returns home win percentage """
@@ -82,8 +87,10 @@ def getHomeWinPct(team_id, year, n_years=35):
     home_wins = len(wins[(wins["WLoc"] == "H")])
     losses = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["LTeamID"] == team_id) & (data["mregularseasoncompactresults_df"]["Season"] > year - n_years)]
     home_losses = len(losses[(losses["WLoc"] != "H")])
-
-    return home_wins / (home_wins + home_losses)
+    if home_wins + home_losses == 0:
+        return np.nan
+    else:
+        return home_wins / (home_wins + home_losses)
 
 def getAwayWinPct(team_id, year, n_years=35):
     """ returns away win percentage """
@@ -91,7 +98,22 @@ def getAwayWinPct(team_id, year, n_years=35):
     losses = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["LTeamID"] == team_id) & (data["mregularseasoncompactresults_df"]["Season"] > year - n_years)]
     away_wins = len(wins[(wins["WLoc"] != "H")])
     away_losses = len(losses[(losses["WLoc"] == "H")])
-    return away_wins / (away_wins + away_losses)
+    if away_wins + away_losses == 0:
+        return np.nan
+    else:
+        return away_wins / (away_wins + away_losses)
+
+def getHomeStat(row):
+    if (row == 'H'):
+        home = 1
+    elif (row == 'A'):
+        home = -1
+    else:
+        home = 0
+    return home
+
+def normalize(array):
+    return stats.zscore(array, axis=1, nan_policy='omit')
 
 ## We can add other helper functions here (coach record, distance from home)
 
@@ -116,17 +138,32 @@ def getTeamSeasonStats(team_id, year):
         wins = kenpom["wins"].values[0]
         losses = kenpom["losses"].values[0]
         win_pct = kenpom["win_pct"].values[0]
-        home_win_pct = getHomeWinPct(team_id, year, 1)
-        away_win_pct = getAwayWinPct(team_id, year, 1)
-        power_six = checkPower6Conference(team_id)
-        n_champs = getLastNChamps(team_id, year, 10)
-        n_ffour = getLastNFinalFour(team_id, year, 10)
-        n_eeight = getLastNEliteEight(team_id, year, 10)
-        return [rank, seed, adj_em, adj_o, adj_d, adj_t, luck, SOS_EM, SOS_O, SOS_D
-                , NCSOS_EM, wins, losses, win_pct, home_win_pct, away_win_pct, power_six
-                , n_champs, n_eeight, n_ffour]
     else:
-        pass
+        rank = np.nan
+        seed = np.nan
+        adj_em = np.nan
+        adj_o = np.nan
+        adj_d = np.nan
+        adj_t = np.nan
+        luck = np.nan
+        SOS_EM = np.nan
+        SOS_O = np.nan
+        SOS_D = np.nan
+        NCSOS_EM = np.nan
+    wins = getNumWins(team_id, year, 1)
+    losses = getNumLosses(team_id, year, 1)
+    win_pct = getWinPct(team_id, year, 1)
+    home_win_pct = getHomeWinPct(team_id, year, 1)
+    away_win_pct = getAwayWinPct(team_id, year, 1)
+    power_six = checkPower6Conference(team_id)
+    n_champs = getLastNChamps(team_id, year, 5)
+    n_ffour = getLastNFinalFour(team_id, year, 5)
+    n_eeight = getLastNEliteEight(team_id, year, 5)
+
+    return [rank, seed, adj_em, adj_o, adj_d, adj_t, luck, SOS_EM, SOS_O, SOS_D
+            , NCSOS_EM, wins, losses, win_pct, home_win_pct, away_win_pct, power_six
+            , n_champs, n_eeight, n_ffour]
+
 def getSeasonStats(year):
     """
     Returns season statistics for every team in a given year
@@ -134,12 +171,70 @@ def getSeasonStats(year):
     season_dict = {}
     for team in data["mteams_df"]["TeamID"]:
         team_stats = getTeamSeasonStats(team, year)
-        if team_stats is None:
-            continue
         season_dict[team] = team_stats
     return season_dict
 
-print(getSeasonStats(2019))
+def generateTrainingData(years):
+    col_ls = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t"
+                , "luck", "sos_em", "sos_o", "sos_d", "ncsos_em", "wins"
+                , "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
+                , "n_champs", "n_ffour", "n_eeight", "home", "result"]
+    rows_list = []
+    for year in years:
+        print("Building year:", year)
+        team_vectors = getSeasonStats(year)
+        season = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["Season"] == year)]
+        tourney = data["mncaatourneycompactresults_df"][(data["mncaatourneycompactresults_df"]["Season"] == year)]
+        counter = 0
+        for _, row in season.iterrows():
+            w_team, l_team = row["WTeamID"], row["LTeamID"]
+            w_vector = team_vectors[w_team]
+            l_vector = team_vectors[l_team]
+            diff = [a - b for a, b in zip(w_vector, l_vector)]
+            home = getHomeStat(row["WLoc"])
+            d = {}
+            if counter % 2 == 0:
+                diff.append(home)
+                diff.append(1)
+                d = dict(zip(col_ls, diff))
+                rows_list.append(d)
+            else:
+                negative_diff = [-x for x in diff]
+                negative_diff.append(home)
+                negative_diff.append(0)
+                d = dict(zip(col_ls, negative_diff))
+                rows_list.append(d)
+            counter += 1
+        for _, row in tourney.iterrows():
+            w_team, l_team = row["WTeamID"], row["LTeamID"]
+            w_vector = team_vectors[w_team]
+            l_vector = team_vectors[l_team]
+            diff = [a - b for a, b in zip(w_vector, l_vector)]
+            home = 0
+            if counter % 2 == 0:
+                diff.append(home)
+                diff.append(1)
+                d = dict(zip(col_ls, diff))
+                rows_list.append(d)
+            else:
+                negative_diff = [-x for x in diff]
+                negative_diff.append(home)
+                negative_diff.append(0)
+                d = dict(zip(col_ls, negative_diff))
+                rows_list.append(d)
+            counter += 1
+    train = pd.DataFrame(rows_list)
+    scaler = preprocessing.StandardScaler()
+    train_scaled = scaler.fit_transform(train)
+    train_scaled = pd.DataFrame(train_scaled, columns=train.columns)
+
+    train.to_csv("training_data.csv", index=False)
+    train_scaled.to_csv("training_data.csv", index=False)
+
+    return train_scaled
+
+print(generateTrainingData(range(2002, 2022)))   
+
 
 
 
