@@ -14,6 +14,7 @@ for f in os.listdir(data_dir):
         data[df_name] = pd.read_csv(os.path.join(data_dir, f))
     else:
         continue
+kenpom_df = pd.read_csv(os.path.join(data_dir, "kenpom.csv"))
 # List of dfs, for reference
 # To access a DF in this dictionary of DF use format: data["df_name"]
 df_ls = []
@@ -67,11 +68,31 @@ def getNumLosses(team_id, n_years=35):
     loss_df = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["LTeamID"] == team_id) & (data["mregularseasoncompactresults_df"]["Season"] > 2020 - n_years)]
     return len(loss_df)
 
-def getWinRatio(team_id, n_years=35):
+def getWinPct(team_id, n_years=35):
+    """ returns total win percentage """
     wins = getNumWins(team_id, n_years)
     losses = getNumLosses(team_id, n_years)
     return wins / (wins + losses)
 
+def getHomeWinPct(team_id, n_years=35):
+    """ returns home win percentage """
+    wins = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["WTeamID"] == team_id) & (data["mregularseasoncompactresults_df"]["Season"] > 2020 - n_years)]
+    home_wins = len(wins[(wins["WLoc"] == "H")])
+    losses = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["LTeamID"] == team_id) & (data["mregularseasoncompactresults_df"]["Season"] > 2020 - n_years)]
+    home_losses = len(losses[(losses["WLoc"] != "H")])
+
+    return home_wins / (home_wins + home_losses)
+
+def getAwayWinPct(team_id, n_years=35):
+    """ returns away win percentage """
+    wins = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["WTeamID"] == team_id) & (data["mregularseasoncompactresults_df"]["Season"] > 2020 - n_years)]
+    losses = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["LTeamID"] == team_id) & (data["mregularseasoncompactresults_df"]["Season"] > 2020 - n_years)]
+    away_wins = len(wins[(wins["WLoc"] != "H")])
+    away_losses = len(losses[(losses["WLoc"] == "H")])
+    return away_wins / (away_wins + away_losses)
+
 # TODO: Add other helper calculations (home win percentage, away win percentage)
 
-print(getWinRatio(1437, 1))
+print(getWinPct(1437, 1))
+print(getHomeWinPct(1437, 1))
+print(getAwayWinPct(1437, 1))
