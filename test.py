@@ -2,28 +2,29 @@ import pandas as pd
 import numpy as np 
 import os 
 from sklearn import preprocessing, metrics
+from sklearn.model_selection import StratifiedKFold, cross_val_score
 from sklearn.linear_model import LogisticRegression
-from sklearn.feature_selection import SelectFromModel
 import lightgbm as lgb
 
 current_dir = os.path.dirname(__file__)
 data_dir = os.path.join(current_dir, "data")
-"""
-test_df = pd.read_csv(os.path.join(data_dir, "MSampleSubmissionStage1.csv"))
-test_df["Season"] = test_df["ID"].apply(lambda x: int(x.split('_')[0]))
-test_df["TeamIdA"] = test_df["ID"].apply(lambda x: int(x.split('_')[1]))
-test_df["TeamIdB"] = test_df["ID"].apply(lambda x: int(x.split('_')[2]))
-print(test_df)
-"""
+
+sample_df = pd.read_csv(os.path.join(data_dir, "MSampleSubmissionStage1.csv"))
+sample_df["Season"] = sample_df["ID"].apply(lambda x: int(x.split('_')[0]))
+sample_df["TeamIdA"] = sample_df["ID"].apply(lambda x: int(x.split('_')[1]))
+sample_df["TeamIdB"] = sample_df["ID"].apply(lambda x: int(x.split('_')[2]))
+
 # Load data
 df = pd.read_csv("training_data.csv")
 features = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t"
                 , "luck", "sos_em", "sos_o", "sos_d", "ncsos_em", "wins"
                 , "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
                 , "n_champs", "n_ffour", "n_eeight", "home"]
+param = {'num_leaves': 64
+        , 'objective': 'binary'
+        , 'metric': ['auc', 'binary_logloss']
+        , 'seed': 42}
 team_vectors = pd.read_csv("team_vectors.csv")
-print(df)
-print(team_vectors)
 
 # split dataset
 def split_data(df, fraction=0.1):
@@ -55,11 +56,7 @@ def train_model(train, valid, test=None, feature_cols=None):
     dtrain = lgb.Dataset(train[feature_cols], label=train["result"])
     dvalid = lgb.Dataset(valid[feature_cols], label=valid["result"])
 
-    param = {'num_leaves': 64
-            , 'objective': 'binary'
-            , 'metric': ['auc', 'logloss']
-            , 'seed': 42}
-    num_round = 1000
+    num_round = 100
     print("Training model!")
     bst = lgb.train(param
                     , dtrain
@@ -83,11 +80,50 @@ def train_model(train, valid, test=None, feature_cols=None):
     else:
         return bst, valid_score
 
-"""
-train, valid, test = split_data(df)
-train, valid, test = scale_features(train, valid, test, features)
-_ = train_model(train, valid)
-"""
+def train_classifier(train, valid, test=None, feature_cols=None):
+    if feature_cols is None:
+        feature_cols = train.columns.drop(["season", "WTeamID", "LTeamID", "result"])
+    model = lgb.LGBMClassifier(**param, n_estimators=1000)
+    train_x, train_y = train[feature_cols], train["result"]
+    model.fit(train_x, train_y, eval_metric='logloss')
+    valid_pred = model.predict(valid[feature_cols])
+    valid_score = metrics.roc_auc_score(valid["result"], valid_pred)
+    valid_loss = metrics.log_loss(valid["result"], valid_pred)
+    print(f"Validation AUC score: {valid_score}")
+    print(f"Validation log loss: {valid_loss}")
+    if test is not None:
+        test_pred = model.predict(test[feature_cols])
+        test_score = metrics.roc_auc_score(test["result"], test_pred)
+        test_loss = metrics.log_loss(test["result"], test_pred)
+        print(f"Test AUC score: {test_score}")
+        print(f"Test log loss: {test_loss}")
+
+    return model
+
+
 # sample test
-def sample_test(TeamIdA, TeamIdB):
-    print(team_vectors)
+def sample_test(TeamIdA, TeamIdB, model, year=2021):
+    low_id = min(TeamIdA, TeamIdB)
+    high_id = max(TeamIdA, TeamIdB)
+    vector_a = team_vectors[(team_vectors["teamID"] == low_id) & (team_vectors["season"] == year)].to_numpy()
+    vector_b = team_vectors[(team_vectors["teamID"] == high_id) & (team_vectors["season"] == year)].to_numpy()
+    diff = [a - b for a, b in zip(vector_a[0], vector_b[0])]
+    diff = np.array(diff[:-2]).reshape(1, -1)
+    pred = model.predict_proba(diff)
+    
+    #print(f"In the {year} season, Team {low_id} has a {pred[0][1]*100}% chance of winning")
+    return pred[0][1]
+
+train, valid, test = split_data(df)
+#train, valid, test = scale_features(train, valid, test, features)
+#bst, _, _ = train_model(train, valid, test)
+model = train_classifier(train, valid, test)
+#sample_test(1438, 1437, model)
+
+result_ls = []
+for i, row in sample_df.iterrows():
+    d = {"ID": row["ID"], "Pred": sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"])}
+    result_ls.append(d)
+
+results = pd.DataFrame(result_ls)
+results.to_csv("results_step1.csv", index=False)
