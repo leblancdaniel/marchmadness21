@@ -162,7 +162,7 @@ def getTeamSeasonStats(team_id, year):
 
     return [rank, seed, adj_em, adj_o, adj_d, adj_t, luck, SOS_EM, SOS_O, SOS_D
             , NCSOS_EM, wins, losses, win_pct, home_win_pct, away_win_pct, power_six
-            , n_champs, n_eeight, n_ffour]
+            , n_champs, n_ffour, n_eeight]
 
 def getSeasonStats(year):
     """
@@ -178,7 +178,7 @@ def generateTrainingData(years):
     col_ls = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t"
                 , "luck", "sos_em", "sos_o", "sos_d", "ncsos_em", "wins"
                 , "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
-                , "n_champs", "n_ffour", "n_eeight", "home", "result"]
+                , "n_champs", "n_ffour", "n_eeight", "home", "season", "WTeamID", "LTeamID", "result"]
     rows_list = []
     for year in years:
         print("Building year:", year)
@@ -194,14 +194,12 @@ def generateTrainingData(years):
             home = getHomeStat(row["WLoc"])
             d = {}
             if counter % 2 == 0:
-                diff.append(home)
-                diff.append(1)
+                diff.extend([home, year, w_team, l_team, 1])
                 d = dict(zip(col_ls, diff))
                 rows_list.append(d)
             else:
                 negative_diff = [-x for x in diff]
-                negative_diff.append(home)
-                negative_diff.append(0)
+                negative_diff.extend([home, year, w_team, l_team, 0])
                 d = dict(zip(col_ls, negative_diff))
                 rows_list.append(d)
             counter += 1
@@ -212,14 +210,12 @@ def generateTrainingData(years):
             diff = [a - b for a, b in zip(w_vector, l_vector)]
             home = 0
             if counter % 2 == 0:
-                diff.append(home)
-                diff.append(1)
+                diff.extend([home, year, w_team, l_team, 1])
                 d = dict(zip(col_ls, diff))
                 rows_list.append(d)
             else:
                 negative_diff = [-x for x in diff]
-                negative_diff.append(home)
-                negative_diff.append(0)
+                negative_diff.extend([home, year, w_team, l_team, 0])
                 d = dict(zip(col_ls, negative_diff))
                 rows_list.append(d)
             counter += 1
@@ -229,7 +225,27 @@ def generateTrainingData(years):
 
     return train
 
-print(generateTrainingData(range(2002, 2022)))   
+def generateTeamVectors(years):
+    cols = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t", "luck", "SOS_EM", "SOS_O", "SOS_D"
+            , "NCSOS_EM", "wins", "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
+            , "n_champs", "n_ffour", "n_eeight", "home", "season", "teamID"]
+    season_ls = []
+    for year in years:
+        team_vectors = getSeasonStats(year)
+        for i in team_vectors:
+            team_vectors[i].extend([0, year, i])
+            d = dict(zip(cols, team_vectors[i]))
+            season_ls.append(d)
+
+    season_vectors = pd.DataFrame(season_ls)
+    season_vectors.to_csv("team_vectors.csv", index=False)
+
+    return season_vectors
+
+year_range = range(2002, 2022)
+
+print(generateTrainingData(year_range))   
+print(generateTeamVectors(year_range))
 
 
 

@@ -29,19 +29,18 @@ We added in the distance from the tournament location (Indianapolis) using the G
 In order to build a new training dataset - just run `processing.py`.
 
 ## Simple model
-Let's try just using logistic regression on a few variables - this should work well for uneven matches where the victor should be obvious, but in the event the match appears to be more even, we may want to try something to account for the uncertainty.
+We built a simple LightGBM model that did pretty well at first shot (0.845 AUC; 0.481 log loss).  
 
 ## Feature engineering (and extra data sources)
 List a few features that would be nice to add (efficiency, schedule difficulty, distance from home, coach ratings,)
 
 ## Complex model(s)
-Maybe try some deep learning methods? Or grid search on a classifier model?
+We should scale the data feeding into our LightGBM model and then grid search the parameters to see what parameters should be.
 
-## Dimensionality Reduction/ Feature Importance
+Next we should try reducing number of dimensions/adding random logic to the output.
 PCA/Feature importance to get rid of variables that don't seem to have much influence on results.
 
-## Compare Results on 2019 data
-
+If there's enough time we could build a deep learning model to predict the outcomes.
 
 ## Import 2021 data
 
