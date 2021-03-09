@@ -1,6 +1,7 @@
 import pandas as pd 
 import numpy as np 
 import os 
+import random
 from sklearn import preprocessing, metrics
 from sklearn.model_selection import StratifiedKFold, cross_val_score
 from sklearn.linear_model import LogisticRegression
@@ -115,7 +116,7 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None):
     diff = [a - b for a, b in zip(vector_a[0], vector_b[0])]
     diff = np.array(diff).reshape(1, -1)
     if hasattr(model, 'predict_proba'):
-        pred = model.predict_proba(diff)[0][1]
+        pred = model.predict_proba(diff)[0]
     pred = model.predict(diff)[0]
     
     #print(f"In the {year} season, Team {low_id} has a {pred[0][1]*100}% chance of winning")
@@ -129,8 +130,37 @@ sample_test(1438, 1437, model, 2021, feature_cols=features)
 
 result_ls = []
 for i, row in sample_df.iterrows():
+    prob = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], features)
+    pred = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], features)
+    if prob < 0.6 and prob > 0.5 and pred == 1:
+        prob = 0.63
+    elif prob < 0.6 and prob > 0.5 and pred == 0:
+        r = random.randint(0, 1)
+        if r == 1:
+            prob = 0.63
+        prob = 0.37
+    elif prob > 0.4 and prob <= 0.5 and pred == 0:
+        prob = 0.37
+    elif prob > 0.4 and prob <= 0.5 and pred == 1:
+        r = random.randint(0, 1)
+        if r == 1:
+            prob = 0.63
+        prob = 0.37
+    elif prob <= 0.4 and pred == 1:
+        r = random.randint(0, 1)
+        if r == 1:
+            prob = 0.63
+        prob = 0.37
+    elif prob >= 0.6 and pred == 0:
+        prob = 0.43
+    else:
+        prob = prob
+
+
+    
+
     d = {"ID": row["ID"], 
-        "Pred": sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], features)
+        "Pred": prob
     }
     result_ls.append(d)
 
