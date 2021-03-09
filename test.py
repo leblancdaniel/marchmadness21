@@ -118,44 +118,44 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None):
     if hasattr(model, 'predict_proba'):
         pred = model.predict_proba(diff)[0]
     pred = model.predict(diff)[0]
-    print(vector_a)
+    luck = diff[0][0]
     #print(f"In the {year} season, Team {low_id} has a {pred[0][1]*100}% chance of winning")
-    return pred
+    return pred, luck
 
 train, valid, test = split_data(df)
 #train, valid, test = scale_features(train, valid, test, features)
 bst, _, _ = train_model(train, valid, test, ["luck", "adj_em", "home", "sos_em", "ncsos_em"])
 model, features = train_classifier(train, valid, test, ["luck", "adj_em", "home", "sos_em", "ncsos_em"])
-sample_test(1438, 1437, model, 2021, feature_cols=features)
+#sample_test(1438, 1437, model, 2021, feature_cols=features)
 
 result_ls = []
 for i, row in sample_df.iterrows():
-    prob = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], features)
-    pred = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], features)
+    prob, luck = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], features)
+    pred, _ = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], features)
     if prob < 0.6 and prob > 0.5 and pred == 1:
-        prob = 0.75
+        prob = 0.67
     elif prob < 0.6 and prob > 0.5 and pred == 0:
-        r = random.randint(0, 1)
-        if r == 1:
-            prob = 0.63
-        prob = 0.33
+        if luck >= 0:
+            prob = 0.75
+        else:
+            prob = 0.25
     elif prob > 0.4 and prob <= 0.5 and pred == 0:
-        prob = 0.25
+        prob = 0.33
     elif prob > 0.4 and prob <= 0.5 and pred == 1:
-        r = random.randint(0, 1)
-        if r == 1:
-            prob = 0.67
-        prob = 0.33
+        if luck >= 0:
+            prob = 0.75
+        else:
+            prob = 0.25
     elif prob <= 0.4 and pred == 1:
-        r = random.randint(0, 1)
-        if r == 1:
-            prob = 0.67
-        prob = 0.33
+        if luck >= 0:
+            prob = 0.75
+        else:
+            prob = 0.25
     elif prob >= 0.6 and pred == 0:
-        r = random.randint(0, 1)
-        if r == 1:
-            prob = 0.67
-        prob = 0.33
+        if luck >= 0:
+            prob = 0.75
+        else:
+            prob = 0.25
     else:
         prob = prob
 
