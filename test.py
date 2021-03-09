@@ -132,26 +132,26 @@ result_ls = []
 for i, row in sample_df.iterrows():
     prob, luck = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], features)
     pred, _ = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], features)
-    if prob < 0.6 and prob > 0.5 and pred == 1:
+    if prob < 0.67 and prob > 0.5 and pred == 1:
         prob = 0.67
-    elif prob < 0.6 and prob > 0.5 and pred == 0:
+    elif prob < 0.67 and prob > 0.5 and pred == 0:
         if luck >= 0:
             prob = 0.67
         else:
             prob = 0.33
-    elif prob > 0.4 and prob <= 0.5 and pred == 0:
+    elif prob > 0.33 and prob <= 0.5 and pred == 0:
         prob = 0.33
-    elif prob > 0.4 and prob <= 0.5 and pred == 1:
+    elif prob > 0.33 and prob <= 0.5 and pred == 1:
         if luck >= 0:
             prob = 0.67
         else:
             prob = 0.33
-    elif prob <= 0.4 and pred == 1:
+    elif prob <= 0.33 and pred == 1:
         if luck >= 0:
             prob = 0.67
         else:
             prob = 0.33
-    elif prob >= 0.6 and pred == 0:
+    elif prob >= 0.67 and pred == 0:
         if luck >= 0:
             prob = 0.67
         else:
