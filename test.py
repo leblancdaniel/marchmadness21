@@ -70,7 +70,7 @@ def train_model(train, valid, test=None, feature_cols=None):
     print(f"Validation AUC score: {valid_score}")
     print(f"Validation log loss: {valid_logloss}")
 
-    print(dict(zip(feature_cols, bst.feature_importances_)))
+    print(dict(zip(feature_cols, bst.feature_importance())))
 
     if test is not None:
         test_pred = bst.predict(test[feature_cols])
@@ -101,8 +101,6 @@ def train_classifier(train, valid, test=None, feature_cols=None):
         print(f"Test AUC score: {test_score}")
         print(f"Test log loss: {test_loss}")
     
-    print(dict(zip(feature_cols, model.feature_importances_)))
-
     return model, feature_cols
 
 
@@ -116,21 +114,26 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None):
     vector_b = team_vectors[(team_vectors["teamID"] == high_id) & (team_vectors["season"] == year)][feature_cols].to_numpy()
     diff = [a - b for a, b in zip(vector_a[0], vector_b[0])]
     diff = np.array(diff).reshape(1, -1)
-    pred = model.predict_proba(diff)
+    if hasattr(model, 'predict_proba'):
+        pred = model.predict_proba(diff)[0][1]
+    pred = model.predict(diff)[0]
     
     #print(f"In the {year} season, Team {low_id} has a {pred[0][1]*100}% chance of winning")
-    return pred[0][1]
+    return pred
 
 train, valid, test = split_data(df)
 #train, valid, test = scale_features(train, valid, test, features)
-#bst, _, _ = train_model(train, valid, test)
+bst, _, _ = train_model(train, valid, test, ["luck", "adj_em", "home", "sos_em", "ncsos_em"])
 model, features = train_classifier(train, valid, test, ["luck", "adj_em", "home", "sos_em", "ncsos_em"])
 sample_test(1438, 1437, model, 2021, feature_cols=features)
 
 result_ls = []
 for i, row in sample_df.iterrows():
-    d = {"ID": row["ID"], "Pred": sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], features)}
+    d = {"ID": row["ID"], 
+        "Pred": sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], features)
+    }
     result_ls.append(d)
 
 results = pd.DataFrame(result_ls)
+print(results)
 results.to_csv("results_step1.csv", index=False)

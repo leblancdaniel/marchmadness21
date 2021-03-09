@@ -4,7 +4,7 @@ A fun project attempting to make a perfect bracket for the [2021 Kaggle Competit
 Here's the inital plan...  
 - ~~Gather a few benchmarks from leaderboards from 2 years ago~~
 - ~~Gather data from 2019 Kaggle competition~~
-- Create REALLY simple model to predict win probability
+- ~~Create REALLY simple model to predict win probability~~
 - ~~Engineer a bunch of new interesting features and use another simple model~~
 - Using the new features, create a more complex model
 - Reduce dimensionality (PCA, etc.) and create another model
@@ -37,10 +37,7 @@ List a few features that would be nice to add (efficiency, schedule difficulty, 
 ## Complex model(s)
 We should scale the data feeding into our LightGBM model and then grid search the parameters to see what parameters should be.
 
-Next we should try reducing number of dimensions/adding random logic to the output.
-PCA/Feature importance to get rid of variables that don't seem to have much influence on results.
-
-If there's enough time we could build a deep learning model to predict the outcomes.
+Next we should try reducing number of dimensions/adding random logic to the output.  Turned out only 5 variables had the most predictive power in our model (`luck`, `adj_em`, `sos_em`, `ncsos_em`, and `home`).
 
 ## Import 2021 data
 
