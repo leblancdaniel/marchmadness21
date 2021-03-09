@@ -226,8 +226,8 @@ def generateTrainingData(years):
     return train
 
 def generateTeamVectors(years):
-    cols = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t", "luck", "SOS_EM", "SOS_O", "SOS_D"
-            , "NCSOS_EM", "wins", "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
+    cols = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t", "luck", "sos_em", "sos_o", "sos_d"
+            , "ncsos_em", "wins", "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
             , "n_champs", "n_ffour", "n_eeight", "home", "season", "teamID"]
     season_ls = []
     for year in years:

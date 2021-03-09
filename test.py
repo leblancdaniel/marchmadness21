@@ -25,7 +25,7 @@ param = {'num_leaves': 64
         , 'metric': ['auc', 'binary_logloss']
         , 'seed': 42}
 team_vectors = pd.read_csv("team_vectors.csv")
-
+print(team_vectors.columns)
 # split dataset
 def split_data(df, fraction=0.1):
     valid_rows = int(len(df) * fraction)
@@ -70,6 +70,8 @@ def train_model(train, valid, test=None, feature_cols=None):
     print(f"Validation AUC score: {valid_score}")
     print(f"Validation log loss: {valid_logloss}")
 
+    print(dict(zip(feature_cols, bst.feature_importances_)))
+
     if test is not None:
         test_pred = bst.predict(test[feature_cols])
         test_score = metrics.roc_auc_score(test["result"], test_pred)
@@ -85,7 +87,8 @@ def train_classifier(train, valid, test=None, feature_cols=None):
         feature_cols = train.columns.drop(["season", "WTeamID", "LTeamID", "result"])
     model = lgb.LGBMClassifier(**param, n_estimators=1000)
     train_x, train_y = train[feature_cols], train["result"]
-    model.fit(train_x, train_y, eval_metric='logloss')
+    valid_x, valid_y = valid[feature_cols], valid["result"]
+    model.fit(train_x, train_y, eval_set=[(valid_x, valid_y)], eval_metric='logloss', early_stopping_rounds=20)
     valid_pred = model.predict(valid[feature_cols])
     valid_score = metrics.roc_auc_score(valid["result"], valid_pred)
     valid_loss = metrics.log_loss(valid["result"], valid_pred)
@@ -97,18 +100,22 @@ def train_classifier(train, valid, test=None, feature_cols=None):
         test_loss = metrics.log_loss(test["result"], test_pred)
         print(f"Test AUC score: {test_score}")
         print(f"Test log loss: {test_loss}")
+    
+    print(dict(zip(feature_cols, model.feature_importances_)))
 
-    return model
+    return model, feature_cols
 
 
 # sample test
-def sample_test(TeamIdA, TeamIdB, model, year=2021):
+def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None):
     low_id = min(TeamIdA, TeamIdB)
     high_id = max(TeamIdA, TeamIdB)
-    vector_a = team_vectors[(team_vectors["teamID"] == low_id) & (team_vectors["season"] == year)].to_numpy()
-    vector_b = team_vectors[(team_vectors["teamID"] == high_id) & (team_vectors["season"] == year)].to_numpy()
+    if feature_cols is None:
+        feature_cols = team_vectors.columns
+    vector_a = team_vectors[(team_vectors["teamID"] == low_id) & (team_vectors["season"] == year)][feature_cols].to_numpy()
+    vector_b = team_vectors[(team_vectors["teamID"] == high_id) & (team_vectors["season"] == year)][feature_cols].to_numpy()
     diff = [a - b for a, b in zip(vector_a[0], vector_b[0])]
-    diff = np.array(diff[:-2]).reshape(1, -1)
+    diff = np.array(diff).reshape(1, -1)
     pred = model.predict_proba(diff)
     
     #print(f"In the {year} season, Team {low_id} has a {pred[0][1]*100}% chance of winning")
@@ -117,12 +124,12 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021):
 train, valid, test = split_data(df)
 #train, valid, test = scale_features(train, valid, test, features)
 #bst, _, _ = train_model(train, valid, test)
-model = train_classifier(train, valid, test)
-#sample_test(1438, 1437, model)
+model, features = train_classifier(train, valid, test, ["luck", "adj_em", "home", "sos_em", "ncsos_em"])
+sample_test(1438, 1437, model, 2021, feature_cols=features)
 
 result_ls = []
 for i, row in sample_df.iterrows():
-    d = {"ID": row["ID"], "Pred": sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"])}
+    d = {"ID": row["ID"], "Pred": sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], features)}
     result_ls.append(d)
 
 results = pd.DataFrame(result_ls)
