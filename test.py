@@ -136,26 +136,26 @@ for i, row in sample_df.iterrows():
         prob = 0.67
     elif prob < 0.6 and prob > 0.5 and pred == 0:
         if luck >= 0:
-            prob = 0.75
+            prob = 0.67
         else:
-            prob = 0.25
+            prob = 0.33
     elif prob > 0.4 and prob <= 0.5 and pred == 0:
         prob = 0.33
     elif prob > 0.4 and prob <= 0.5 and pred == 1:
         if luck >= 0:
-            prob = 0.75
+            prob = 0.67
         else:
-            prob = 0.25
+            prob = 0.33
     elif prob <= 0.4 and pred == 1:
         if luck >= 0:
-            prob = 0.75
+            prob = 0.67
         else:
-            prob = 0.25
+            prob = 0.33
     elif prob >= 0.6 and pred == 0:
         if luck >= 0:
-            prob = 0.75
+            prob = 0.67
         else:
-            prob = 0.25
+            prob = 0.33
     else:
         prob = prob
 
