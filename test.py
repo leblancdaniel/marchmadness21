@@ -118,7 +118,7 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None):
     if hasattr(model, 'predict_proba'):
         pred = model.predict_proba(diff)[0]
     pred = model.predict(diff)[0]
-    
+    print(vector_a)
     #print(f"In the {year} season, Team {low_id} has a {pred[0][1]*100}% chance of winning")
     return pred
 
@@ -133,14 +133,14 @@ for i, row in sample_df.iterrows():
     prob = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], features)
     pred = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], features)
     if prob < 0.6 and prob > 0.5 and pred == 1:
-        prob = 0.67
+        prob = 0.75
     elif prob < 0.6 and prob > 0.5 and pred == 0:
         r = random.randint(0, 1)
         if r == 1:
             prob = 0.63
         prob = 0.33
     elif prob > 0.4 and prob <= 0.5 and pred == 0:
-        prob = 0.33
+        prob = 0.25
     elif prob > 0.4 and prob <= 0.5 and pred == 1:
         r = random.randint(0, 1)
         if r == 1:
