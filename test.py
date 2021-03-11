@@ -116,52 +116,40 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None, from_indy
     vector_a = team_vectors[(team_vectors["teamID"] == low_id) & (team_vectors["season"] == year)][feature_cols].to_numpy()
     vector_b = team_vectors[(team_vectors["teamID"] == high_id) & (team_vectors["season"] == year)][feature_cols].to_numpy()
     diff = [a - b for a, b in zip(vector_a[0], vector_b[0])]
-    print(feature_cols)
-    print(vector_a)
-    print(vector_b)
-    print(diff)
     diff = np.array(diff).reshape(1, -1)
     if hasattr(model, 'predict_proba'):
         pred = model.predict_proba(diff)[0]
     pred = model.predict(diff)[0]
-    luck = diff[0][0]
+    home = diff[0][-1]
     #print(f"In the {year} season, Team {low_id} has a {pred[0][1]*100}% chance of winning")
-    return pred, luck
-
-train, valid, test = split_data(df)
-#train, valid, test = scale_features(train, valid, test, features)
-bst, _, _ = train_model(train, valid, test, ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
-model, features = train_classifier(train, valid, test, ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
-sample_test(1438, 1437, model, 2021, feature_cols=features, from_indy=False)
+    return pred, home
 
 def generateSample():
     result_ls = []
-
     for i, row in sample_df.iterrows():
-        prob, luck = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], features)
-        pred, _ = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], features)
-        
+        prob, home = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
+        pred, _ = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
         if prob < 0.67 and prob > 0.5 and pred == 1:
             prob = 0.67
         elif prob < 0.67 and prob > 0.5 and pred == 0:
-            if luck >= 0:
+            if home >= 0:
                 prob = 0.67
             else:
                 prob = 0.33
         elif prob > 0.33 and prob <= 0.5 and pred == 0:
             prob = 0.33
         elif prob > 0.33 and prob <= 0.5 and pred == 1:
-            if luck >= 0:
+            if home >= 0:
                 prob = 0.67
             else:
                 prob = 0.33
         elif prob <= 0.33 and pred == 1:
-            if luck >= 0:
+            if home >= 0:
                 prob = 0.67
             else:
                 prob = 0.33
         elif prob >= 0.67 and pred == 0:
-            if luck >= 0:
+            if home >= 0:
                 prob = 0.67
             else:
                 prob = 0.33
@@ -180,3 +168,10 @@ def generateSample():
     results = pd.DataFrame(result_ls)
     print(results)
     results.to_csv("results_step1.csv", index=False)
+
+train, valid, test = split_data(df)
+#train, valid, test = scale_features(train, valid, test, features)
+bst, _, _ = train_model(train, valid, test, ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
+model, features = train_classifier(train, valid, test, ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
+#sample_test(1438, 1437, model, 2021, feature_cols=features, from_indy=False)
+generateSample()

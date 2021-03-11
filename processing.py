@@ -36,6 +36,30 @@ min_dist = min(team_homes_df["dist_to_indy"])
 team_homes_df["scale"] = (team_homes_df["dist_to_indy"] - min_dist) / (max_dist - min_dist)
 team_homes_df["home_proxy"] = (team_homes_df["scale"] - 0.5) * -2
 
+# remove leaked data from tourney compact results
+def concat_row(r):
+    if r['WTeamID'] < r['LTeamID']:
+        res = str(r['Season'])+"_"+str(r['WTeamID'])+"_"+str(r['LTeamID'])
+    else:
+        res = str(r['Season'])+"_"+str(r['LTeamID'])+"_"+str(r['WTeamID'])
+    return res
+
+# Delete leaked from train
+def delete_leaked_from_df_train(df_train, df_test):
+    df_train['Concats'] = df_train.apply(concat_row, axis=1)
+    df_train_duplicates = df_train[df_train['Concats'].isin(df_test['ID'].unique())]
+    df_train_idx = df_train_duplicates.index.values
+    df_train = df_train.drop(df_train_idx)
+    df_train = df_train.drop('Concats', axis=1)
+    
+    return df_train 
+print("Tourney dataset size before")
+print(data['mncaatourneycompactresults_df'].shape)
+df_test = pd.read_csv(os.path.join(data_dir, "MSampleSubmissionStage1.csv"))
+data['mncaatourneycompactresults_df'] = delete_leaked_from_df_train(data['mncaatourneycompactresults_df'], df_test)
+print("Tourney dataset size after")
+print(data['mncaatourneycompactresults_df'].shape)
+
 # List of dfs, for reference
 # To access a DF in this dictionary of DF use format: data["df_name"]
 df_ls = []
