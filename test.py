@@ -124,8 +124,8 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None):
 
 train, valid, test = split_data(df)
 #train, valid, test = scale_features(train, valid, test, features)
-bst, _, _ = train_model(train, valid, test)
-model, features = train_classifier(train, valid, test)
+bst, _, _ = train_model(train, valid, test, ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
+model, features = train_classifier(train, valid, test, ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
 #sample_test(1438, 1437, model, 2021, feature_cols=features)
 
 result_ls = []
