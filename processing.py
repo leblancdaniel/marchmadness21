@@ -23,6 +23,19 @@ kenpom_df["name"] = kenpom_df["name"].str.replace("*", "", regex=True)
 kenpom_df["name"] = kenpom_df["name"].str.translate({ord(k): None for k in digits})
 kenpom_df["name"] = kenpom_df["name"].str.strip()
 kenpom_df = pd.merge(kenpom_df, data["mteamspellings_df"], how="left", left_on="name", right_on="TeamNameSpelling")
+
+# assign Home city ID to team ID
+distances_df = pd.read_csv("cities_w_dist.csv")
+game_cities_df = data["mgamecities_df"][(data["mgamecities_df"]["CRType"] == "Regular")]
+game_distances_df = pd.merge(game_cities_df, distances_df, how='left', on="CityID")
+home_win_games_df = data["mregularseasoncompactresults_df"][(data["mregularseasoncompactresults_df"]["WLoc"] == "H")]
+team_homes_df = pd.merge(game_distances_df, home_win_games_df, how='left', on=["Season", "WTeamID"])
+team_homes_df = team_homes_df[["WTeamID", "CityID", "City", "dist_to_indy"]].drop_duplicates(subset=["WTeamID"], keep='last')
+max_dist = max(team_homes_df["dist_to_indy"])
+min_dist = min(team_homes_df["dist_to_indy"])
+team_homes_df["scale"] = (team_homes_df["dist_to_indy"] - min_dist) / (max_dist - min_dist)
+team_homes_df["home_proxy"] = (team_homes_df["scale"] - 0.5) * -2
+
 # List of dfs, for reference
 # To access a DF in this dictionary of DF use format: data["df_name"]
 df_ls = []
@@ -123,6 +136,7 @@ def getTeamSeasonStats(team_id, year):
     Returns a vector of attributes
     """
     kenpom = kenpom_df[(kenpom_df["year"] == year) & (kenpom_df["TeamID"] == team_id)]
+    team_home = team_homes_df[(team_homes_df["WTeamID"] == team_id)]
     if len(kenpom) >= 1:
         rank = kenpom["rank"].values[0]
         seed = kenpom["seed"].values[0]
@@ -159,10 +173,14 @@ def getTeamSeasonStats(team_id, year):
     n_champs = getLastNChamps(team_id, year, 5)
     n_ffour = getLastNFinalFour(team_id, year, 5)
     n_eeight = getLastNEliteEight(team_id, year, 5)
+    if len(team_home) < 1:
+        home_proxy = np.nan
+    else:
+        home_proxy = team_home["home_proxy"].values[0]
 
     return [rank, seed, adj_em, adj_o, adj_d, adj_t, luck, SOS_EM, SOS_O, SOS_D
             , NCSOS_EM, wins, losses, win_pct, home_win_pct, away_win_pct, power_six
-            , n_champs, n_ffour, n_eeight]
+            , n_champs, n_ffour, n_eeight, home_proxy]
 
 def getSeasonStats(year):
     """
@@ -178,7 +196,7 @@ def generateTrainingData(years):
     col_ls = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t"
                 , "luck", "sos_em", "sos_o", "sos_d", "ncsos_em", "wins"
                 , "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
-                , "n_champs", "n_ffour", "n_eeight", "home", "season", "WTeamID", "LTeamID", "result"]
+                , "n_champs", "n_ffour", "n_eeight", "home_proxy", "home", "season", "WTeamID", "LTeamID", "result"]
     rows_list = []
     for year in years:
         print("Building year:", year)
@@ -228,7 +246,7 @@ def generateTrainingData(years):
 def generateTeamVectors(years):
     cols = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t", "luck", "sos_em", "sos_o", "sos_d"
             , "ncsos_em", "wins", "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
-            , "n_champs", "n_ffour", "n_eeight", "home", "season", "teamID"]
+            , "n_champs", "n_ffour", "n_eeight", "home_proxy", "home", "season", "teamID"]
     season_ls = []
     for year in years:
         team_vectors = getSeasonStats(year)
