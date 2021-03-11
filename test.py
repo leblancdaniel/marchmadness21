@@ -156,10 +156,10 @@ for i, row in sample_df.iterrows():
             prob = 0.67
         else:
             prob = 0.33
-    elif prob >= 0.95:
-        prob = 0.95
-    elif prob <= 0.05:
-        prob = 0.05
+    elif prob >= 0.90:
+        prob = 0.90
+    elif prob <= 0.1:
+        prob = 0.1
     else:
         prob = prob
 
