@@ -89,7 +89,7 @@ def train_classifier(train, valid, test=None, feature_cols=None):
     model = lgb.LGBMClassifier(**param, n_estimators=1000)
     train_x, train_y = train[feature_cols], train["result"]
     valid_x, valid_y = valid[feature_cols], valid["result"]
-    model.fit(train_x, train_y, eval_set=[(valid_x, valid_y)], eval_metric='logloss', early_stopping_rounds=20)
+    model.fit(train_x, train_y, eval_set=[(valid_x, valid_y)], eval_metric='logloss', early_stopping_rounds=100)
     valid_pred = model.predict(valid[feature_cols])
     valid_score = metrics.roc_auc_score(valid["result"], valid_pred)
     valid_loss = metrics.log_loss(valid["result"], valid_pred)
@@ -169,7 +169,7 @@ def generateSample(feature_cols):
     print(results)
     results.to_csv("results_step1.csv", index=False)
 
-feats = ["adj_em", "luck", "sos_em", "ncsos_em", "away_win_pct", "home", "massey_rank"]
+feats = ["adj_em", "luck", "sos_em", "ncsos_em", "home", "massey_rank"]
 train, valid, test = split_data(df)
 #train, valid, test = scale_features(train, valid, test, features)
 bst, _, _ = train_model(train, valid, test, feats)

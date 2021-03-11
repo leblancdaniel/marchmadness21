@@ -6,12 +6,11 @@ Here's the inital plan...
 - ~~Gather data from 2019 Kaggle competition~~
 - ~~Create REALLY simple model to predict win probability~~
 - ~~Engineer a bunch of new interesting features and use another simple model~~
-- Using the new features, create a more complex model
-- Reduce dimensionality (PCA, etc.) and create another model
-- Test & compare results on 2019 data
+- ~~Using the new features, create a more complex model~~
+- ~~Reduce dimensionality (PCA, etc.) and create another model~~
+- ~~Test & compare results on 2019 data~~
 - Collect 2021 data & import into our dataset
 - Test old models on 2021 bracket
-- Re-train models using 2021 data
 - Test new models on 2021 bracket
 
 ## Top models from 2019 competition
