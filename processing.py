@@ -36,6 +36,8 @@ min_dist = min(team_homes_df["dist_to_indy"])
 team_homes_df["scale"] = (team_homes_df["dist_to_indy"] - min_dist) / (max_dist - min_dist)
 team_homes_df["home_proxy"] = (team_homes_df["scale"] - 0.5) * -2
 
+# Massey Ordinals
+
 # remove leaked data from tourney compact results
 def concat_row(r):
     if r['WTeamID'] < r['LTeamID']:
@@ -161,6 +163,8 @@ def getTeamSeasonStats(team_id, year):
     """
     kenpom = kenpom_df[(kenpom_df["year"] == year) & (kenpom_df["TeamID"] == team_id)]
     team_home = team_homes_df[(team_homes_df["WTeamID"] == team_id)]
+    massey = data['mmasseyordinals_df'][(data['mmasseyordinals_df']["Season"] == year) & (data['mmasseyordinals_df']["TeamID"] == team_id)]
+
     if len(kenpom) >= 1:
         rank = kenpom["rank"].values[0]
         seed = kenpom["seed"].values[0]
@@ -201,10 +205,14 @@ def getTeamSeasonStats(team_id, year):
         home_proxy = np.nan
     else:
         home_proxy = team_home["home_proxy"].values[0]
+    if len(massey) < 1:
+        massey_rank = np.nan 
+    else:
+        massey_rank = massey["OrdinalRank"].values[0]
 
     return [rank, seed, adj_em, adj_o, adj_d, adj_t, luck, SOS_EM, SOS_O, SOS_D
             , NCSOS_EM, wins, losses, win_pct, home_win_pct, away_win_pct, power_six
-            , n_champs, n_ffour, n_eeight, home_proxy]
+            , n_champs, n_ffour, n_eeight, home_proxy, massey_rank]
 
 def getSeasonStats(year):
     """
@@ -220,7 +228,7 @@ def generateTrainingData(years):
     col_ls = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t"
                 , "luck", "sos_em", "sos_o", "sos_d", "ncsos_em", "wins"
                 , "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
-                , "n_champs", "n_ffour", "n_eeight", "home_proxy", "home", "season", "WTeamID", "LTeamID", "result"]
+                , "n_champs", "n_ffour", "n_eeight", "home_proxy", "massey_rank", "home", "season", "WTeamID", "LTeamID", "result"]
     rows_list = []
     for year in years:
         print("Building year:", year)
@@ -270,7 +278,7 @@ def generateTrainingData(years):
 def generateTeamVectors(years):
     cols = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t", "luck", "sos_em", "sos_o", "sos_d"
             , "ncsos_em", "wins", "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
-            , "n_champs", "n_ffour", "n_eeight", "home_proxy", "home", "season", "teamID"]
+            , "n_champs", "n_ffour", "n_eeight", "home_proxy", "massey_rank", "home", "season", "teamID"]
     season_ls = []
     for year in years:
         team_vectors = getSeasonStats(year)

@@ -20,7 +20,7 @@ df = pd.read_csv("training_data.csv")
 features = ["rank", "seed", "adj_em", "adj_o", "adj_d", "adj_t"
                 , "luck", "sos_em", "sos_o", "sos_d", "ncsos_em", "wins"
                 , "losses", "win_pct", "home_win_pct", "away_win_pct", "power_six"
-                , "n_champs", "n_ffour", "n_eeight", "home"]
+                , "n_champs", "n_ffour", "n_eeight", "home", "home_proxy", "massey_rank"]
 param = {'num_leaves': 64
         , 'objective': 'binary'
         , 'metric': ['auc', 'binary_logloss']
@@ -124,11 +124,11 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None, from_indy
     #print(f"In the {year} season, Team {low_id} has a {pred[0][1]*100}% chance of winning")
     return pred, home
 
-def generateSample():
+def generateSample(feature_cols):
     result_ls = []
     for i, row in sample_df.iterrows():
-        prob, home = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
-        pred, _ = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
+        prob, home = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], feature_cols)
+        pred, _ = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], feature_cols)
         if prob < 0.67 and prob > 0.5 and pred == 1:
             prob = 0.67
         elif prob < 0.67 and prob > 0.5 and pred == 0:
@@ -169,9 +169,10 @@ def generateSample():
     print(results)
     results.to_csv("results_step1.csv", index=False)
 
+feats = ["adj_em", "luck", "sos_o", "sos_d", "ncsos_em", "away_win_pct", "rank", "home", "massey_rank"]
 train, valid, test = split_data(df)
 #train, valid, test = scale_features(train, valid, test, features)
-bst, _, _ = train_model(train, valid, test, ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
-model, features = train_classifier(train, valid, test, ["adj_em", "luck", "sos_em", "ncsos_em", "home"])
-#sample_test(1438, 1437, model, 2021, feature_cols=features, from_indy=False)
-generateSample()
+bst, _, _ = train_model(train, valid, test, feats)
+model, features = train_classifier(train, valid, test, feats)
+#sample_test(1438, 1437, model, 2021, feature_cols=feats, from_indy=False)
+generateSample(feats)
