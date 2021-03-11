@@ -169,7 +169,7 @@ def generateSample(feature_cols):
     print(results)
     results.to_csv("results_step1.csv", index=False)
 
-feats = ["adj_em", "luck", "sos_o", "sos_d", "ncsos_em", "away_win_pct", "rank", "home", "massey_rank"]
+feats = ["adj_em", "luck", "sos_em", "ncsos_em", "away_win_pct", "home", "massey_rank"]
 train, valid, test = split_data(df)
 #train, valid, test = scale_features(train, valid, test, features)
 bst, _, _ = train_model(train, valid, test, feats)
