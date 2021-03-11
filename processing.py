@@ -242,7 +242,7 @@ def generateTeamVectors(years):
 
     return season_vectors
 
-year_range = range(2002, 2022)
+year_range = range(2012, 2022)
 
 print(generateTrainingData(year_range))   
 print(generateTeamVectors(year_range))

@@ -124,8 +124,8 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None):
 
 train, valid, test = split_data(df)
 #train, valid, test = scale_features(train, valid, test, features)
-bst, _, _ = train_model(train, valid, test, ["luck", "adj_em", "home", "sos_em", "ncsos_em"])
-model, features = train_classifier(train, valid, test, ["luck", "adj_em", "home", "sos_em", "ncsos_em"])
+bst, _, _ = train_model(train, valid, test, ["luck", "adj_em", "sos_em", "ncsos_em"])
+model, features = train_classifier(train, valid, test, ["luck", "adj_em", "sos_em", "ncsos_em"])
 #sample_test(1438, 1437, model, 2021, feature_cols=features)
 
 result_ls = []
@@ -156,10 +156,6 @@ for i, row in sample_df.iterrows():
             prob = 0.67
         else:
             prob = 0.33
-    elif prob > 0.97:
-        prob = 1.0
-    elif prob < 0.03:
-        prob = 0.0
     else:
         prob = prob
 
