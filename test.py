@@ -118,40 +118,18 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None, from_indy
     if hasattr(model, 'predict_proba'):
         pred = model.predict_proba(diff)[0]
     pred = model.predict(diff)[0]
-    home = diff[0][-1]
+    luck = diff[0][1]
     #print(f"In the {year} season, Team {low_id} has a {pred[0][1]*100}% chance of winning")
     teams = [low_id, high_id]
-    return pred, home, teams
+    return pred, luck, teams
 
-def generateSample(feature_cols):
+def generateSample(feature_cols, from_indy=False):
     result_ls = []
     for i, row in sample_df.iterrows():
-        prob, home, _ = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], feature_cols)
-        pred, _, _ = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], feature_cols)
+        prob, luck, _ = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], feature_cols, from_indy)
+        pred, _, _ = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], feature_cols, from_indy)
 
-        if prob < 0.64 and prob > 0.5 and pred == 1:
-            prob = 0.64
-        elif prob < 0.67 and prob > 0.5 and pred == 0:
-            r = random.randint(0, 1)
-            if r == 0:
-                prob = 0.36
-            else:
-                prob = 0.64
-        elif prob > 0.36 and prob <= 0.5 and pred == 0:
-            prob = 0.36
-        elif prob > 0.36 and prob <= 0.5 and pred == 1:
-            r = random.randint(0, 1)
-            if r == 0:
-                prob = 0.36
-            else:
-                prob = 0.64
-        elif prob <= 0.36 and pred == 1:
-            r = random.randint(0, 1)
-            if r == 0:
-                prob = 0.36
-            else:
-                prob = 0.64
-        elif prob >= 0.64 and pred == 0:
+        if prob < 0.64 and prob > 0.36:
             r = random.randint(0, 1)
             if r == 0:
                 prob = 0.36
@@ -170,7 +148,7 @@ def generateSample(feature_cols):
         result_ls.append(d)
 
     results = pd.DataFrame(result_ls)
-    results.to_csv("results_step2.csv", index=False)
+    results.to_csv("random_results_step2.csv", index=False)
     return results
 
 def sim_winner(teamA, teamB, df):
@@ -220,14 +198,14 @@ def simulation(df):
     east_32_g = sim_winner(1163, 1268, df)             # UConn vs Maryland
     east_32_h = sim_winner(1104, 1233, df)             # Alabama vs Iona
     print("MIDWEST")
-    midwest_32_a = sim_winner(1228, 1180, df)     # Illinois vs Drexel
-    midwest_32_b = sim_winner(1260, 1210, df)             # Loyola Chicago vs Georgia Tech
-    midwest_32_c = sim_winner(1397, 1333, df)             # Tennessee vs Oregon St
-    midwest_32_d = sim_winner(1329, 1251, df)             # Oklahoma St vs Liberty
-    midwest_32_e = sim_winner(1361, 1393, df)      # San Diego St vs Syracuse
-    midwest_32_f = sim_winner(1452, 1287, df)             # West Virginia vs Morehead St
-    midwest_32_g = sim_winner(1155, 1353, df)             # Clemson vs Rutgers
-    midwest_32_h = sim_winner(1222, 1156, df)             # Houston vs Cleveland St
+    midwest_32_a = sim_winner(1228, 1180, df)          # Illinois vs Drexel
+    midwest_32_b = sim_winner(1260, 1210, df)          # Loyola Chicago vs Georgia Tech
+    midwest_32_c = sim_winner(1397, 1333, df)          # Tennessee vs Oregon St
+    midwest_32_d = sim_winner(1329, 1251, df)          # Oklahoma St vs Liberty
+    midwest_32_e = sim_winner(1361, 1393, df)          # San Diego St vs Syracuse
+    midwest_32_f = sim_winner(1452, 1287, df)          # West Virginia vs Morehead St
+    midwest_32_g = sim_winner(1155, 1353, df)          # Clemson vs Rutgers
+    midwest_32_h = sim_winner(1222, 1156, df)          # Houston vs Cleveland St
     print()
     print("-----Simulate Second Round-----")
     print("WEST")
@@ -283,7 +261,7 @@ def simulation(df):
     print()
     print("-----Simulate National Championship-----")
     champion = sim_winner(semi_a, semi_b, df)        
-    print(sample_test(semi_a, semi_b, bst, 2021, feats, from_indy=False))
+    print(sample_test(semi_a, semi_b, bst, 2021, feats, from_indy=True))
 
 
 
@@ -294,5 +272,5 @@ bst, _, _ = train_model(train, valid, test, feats)
 model = train_classifier(train, valid, test, feats)
 #sample_test(1438, 1437, model, 2021, feature_cols=None, from_indy=True)
 
-results = generateSample(feats)
+results = generateSample(feats, from_indy=True)
 simulation(results)

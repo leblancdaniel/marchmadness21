@@ -53,6 +53,5 @@ Our personal brackets:
 Our model brackets:
 - Baseline Model
 - Distance from Home
-- Luck Boost
 - Luck & Distance from Home
 - Random Uncertainty
