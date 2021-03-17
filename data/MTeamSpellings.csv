@@ -45,7 +45,6 @@ arizona state,1113
 arizona-st,1113
 arizona-state,1113
 ark little rock,1114
-arkansas pine bluff,1115
 ark pine bluff,1115
 ark-pine-bluff,1115
 ark.-pine bluff,1115
@@ -53,7 +52,6 @@ arkansas,1116
 arkansas st,1117
 arkansas st.,1117
 arkansas state,1117
-arkansas little rock,1114
 arkansas-little rock,1114
 arkansas-little-rock,1114
 arkansas-pine bluff,1115
@@ -79,7 +77,6 @@ ball-state,1123
 baylor,1124
 bellarmine,1468
 belmont,1125
-bethune cookman,1126
 bethune-cookman,1126
 binghamton,1127
 birmingham so,1128
@@ -121,7 +118,6 @@ cal poly slo,1142
 cal riverside,1415
 cal st. fullerton,1168
 cal st. northridge,1169
-cal st. bakersfield,1167
 cal state bakersfield,1167
 cal state fullerton,1168
 cal state northridge,1169
@@ -232,7 +228,6 @@ depaul,1177
 detroit,1178
 detroit mercy,1178
 detroit-mercy,1178
-dixie st.,1469
 dixie st,1469
 drake,1179
 drexel,1180
@@ -365,7 +360,6 @@ illinois,1228
 illinois st,1229
 illinois st.,1229
 illinois state,1229
-illinois chicago,1227
 illinois-chicago,1227
 illinois-st,1229
 illinois-state,1229
@@ -435,7 +429,6 @@ lipscomb,1252
 little rock,1114
 little-rock,1114
 liu brooklyn,1254
-liu,1254
 liu-brooklyn,1254
 long beach st,1253
 long beach st.,1253
@@ -451,9 +444,7 @@ longwood,1255
 louisiana,1418
 louisiana state,1261
 louisiana tech,1256
-louisiana lafayette,1418
 louisiana-lafayette,1418
-louisiana monroe,1419
 louisiana-monroe,1419
 louisiana-state,1261
 louisiana-tech,1256
@@ -479,7 +470,6 @@ marist,1265
 marquette,1266
 marshall,1267
 maryland,1268
-maryland eastern shore,1271
 maryland - e. shore,1271
 maryland-baltimore county,1420
 maryland-baltimore-county,1420
@@ -538,7 +528,6 @@ mississippi valley state,1290
 mississippi-st,1280
 mississippi-state,1280
 mississippi-val,1290
-mississippi valley st.,1290
 mississippi-valley-state,1290
 missouri,1281
 missouri kc,1282
@@ -651,7 +640,6 @@ north ala.,1466
 north alabama,1466
 north carolina,1314
 north carolina a&t,1299
-north carolina central 16**,1300
 north carolina central,1300
 north carolina st.,1301
 north carolina state,1301
@@ -783,13 +771,13 @@ sacred-heart,1357
 saint francis (pa),1384
 saint joseph's,1386
 saint joseph`s,1386
-saint josephâ€™s,1386
+saint joseph’s,1386
 saint louis,1387
 saint mary's,1388
 saint mary's (ca),1388
 saint peter's,1389
 saint peter`s,1389
-saint peterâ€™s,1389
+saint peter’s,1389
 saint-francis-pa,1384
 saint-josephs,1386
 saint-louis,1387
@@ -870,7 +858,6 @@ south-dakota-st,1355
 south-dakota-state,1355
 south-fla,1378
 south-florida,1378
-southeast missouri st.,1369
 southeast missouri state,1369
 southeast mo. st.,1369
 southeast-missouri-state,1369
@@ -903,7 +890,6 @@ southern-mississippi,1379
 southern-u,1380
 southern-university,1380
 southern-utah,1381
-southwest missouri st.,1283
 southwest missouri state,1283
 st bonaventure,1382
 st francis (ny),1383
@@ -930,15 +916,13 @@ st-peters,1389
 st. bonaventure,1382
 st. francis (bkn),1383
 st. francis (ny),1383
-st. francis pa,1384
 st. francis (pa),1384
 st. francis brooklyn,1383
-st. francis ny,1383
 st. francis-ny,1383
 st. john's,1385
 st. john's (ny),1385
 st. john`s (ny),1385
-st. johnâ€™s,1385
+st. john’s,1385
 st. joseph's,1386
 st. joseph's pa,1386
 st. mary's,1388
@@ -955,7 +939,6 @@ sw missouri st.,1283
 syracuse,1393
 tam c,1394
 tam c. christi,1394
-tarleton st.,1470
 tarleton st,1470
 tcu,1395
 temple,1396
@@ -966,7 +949,6 @@ tennessee st.,1398
 tennessee state,1398
 tennessee tech,1399
 tennessee-chattanooga,1151
-tennessee martin,1404
 tennessee-martin,1404
 tennessee-st,1398
 tennessee-state,1398
@@ -988,22 +970,18 @@ texas st.,1402
 texas state,1402
 texas tech,1403
 texas-am,1401
-texas a&m corpus chris,1394
 texas-am-corpus-christi,1394
 texas-arlington,1426
 texas-christian,1395
 texas-el paso,1431
 texas-el-paso,1431
-texas pan american,1410
 texas-pan american,1410
 texas-pan-american,1410
-ut rio grande valley,1410
 texas-rio grande valley,1410
 texas-san antonio,1427
 texas-san antonio(ut,1427
 texas-san-antonio,1427
 texas-southern,1411
-southwest texas st.,1402
 texas-st,1402
 texas-state,1402
 texas-tech,1403
@@ -1143,7 +1121,6 @@ wichitastate,1455
 william & mary,1456
 william--mary,1456
 william-mary,1456
-winston salem st.,1445
 winston salem,1445
 winston-salem,1445
 winston-salem-state,1445

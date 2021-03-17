@@ -86,5 +86,4 @@ kenpom = kenpom.drop(['school', 'w_l'], axis=1)
 print(kenpom.dtypes)
 print(kenpom.head())
 
-outfile = "kenpom.csv"
-kenpom.to_csv(outfile, index=False)
+kenpom.to_csv(os.path.join(data_dir, "kenpom.csv"), index=False)
