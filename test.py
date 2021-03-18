@@ -126,7 +126,7 @@ def sample_test(TeamIdA, TeamIdB, model, year=2021, feature_cols=None, from_indy
 def generateSample(feature_cols, from_indy=False):
     result_ls = []
     for i, row in sample_df.iterrows():
-        prob, luck, _ = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], feature_cols, from_indy)
+        prob, luck, teams = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], feature_cols, from_indy)
         pred, _, _ = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], feature_cols, from_indy)
 
         if prob < 0.64 and prob > 0.36:
@@ -139,6 +139,12 @@ def generateSample(feature_cols, from_indy=False):
             prob = 0.95
         elif prob <= 0.05:
             prob = 0.05
+        elif teams[0] == 1276:
+            prob = prob - 0.10
+        elif teams[1] == 1276:
+            prob = prob + 0.10
+        elif luck > 0:
+            prob = prob + 0.05
         else:
             prob = prob
 
@@ -148,7 +154,7 @@ def generateSample(feature_cols, from_indy=False):
         result_ls.append(d)
 
     results = pd.DataFrame(result_ls)
-    results.to_csv("random_results_step2.csv", index=False)
+    results.to_csv("homeproxyluckboost_results_step2.csv", index=False)
     return results
 
 def sim_winner(teamA, teamB, df):
@@ -272,5 +278,5 @@ bst, _, _ = train_model(train, valid, test, feats)
 model = train_classifier(train, valid, test, feats)
 #sample_test(1438, 1437, model, 2021, feature_cols=None, from_indy=True)
 
-results = generateSample(feats, from_indy=True)
+results = generateSample(feats, from_indy=False)
 simulation(results)

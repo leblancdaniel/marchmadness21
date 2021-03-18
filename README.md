@@ -1,18 +1,6 @@
 # marchmadness21
 A fun project attempting to make a perfect bracket for the [2021 Kaggle Competition](https://www.kaggle.com/c/ncaam-march-mania-2021/data)!!!
 
-Here's the inital plan...  
-- ~~Gather a few benchmarks from leaderboards from 2 years ago~~
-- ~~Gather data from 2019 Kaggle competition~~
-- ~~Create REALLY simple model to predict win probability~~
-- ~~Engineer a bunch of new interesting features and use another simple model~~
-- ~~Using the new features, create a more complex model~~
-- ~~Reduce dimensionality (PCA, etc.) and create another model~~
-- ~~Test & compare results on 2019 data~~
-- Collect 2021 data & import into our dataset
-- Test old models on 2021 bracket
-- Test new models on 2021 bracket
-
 ## Top models from 2019 competition
 Each year, Kaggle hosts a competition to come up with the best bracket prediction method.  The leaderboard ranking are sorted in ascending order by `log loss`.  In the 2019 competition, the 1st place received a log loss of `0.41477`, 5th place log loss was `0.43148`, and 10th place log loss was `0.43759`.  You can see the full 2019 leaderboard [here](https://www.kaggle.com/c/mens-machine-learning-competition-2019/leaderboard).
 
@@ -51,7 +39,7 @@ Our personal brackets:
 - steve's puny human guess: 
 
 Our model brackets:
-- Baseline Model
-- Distance from Home
-- Luck & Distance from Home
-- Random Uncertainty
+- Baseline Model: 
+- Distance from Home Proxy: 
+- Distance from Home + Luck Boost: 
+- Home Proxy w/ Added Uncertainty: 
