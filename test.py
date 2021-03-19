@@ -128,6 +128,10 @@ def generateSample(feature_cols, from_indy=False):
     for i, row in sample_df.iterrows():
         prob, luck, teams = sample_test(row["TeamIdA"], row["TeamIdB"], bst, row["Season"], feature_cols, from_indy)
         pred, _, _ = sample_test(row["TeamIdA"], row["TeamIdB"], model, row["Season"], feature_cols, from_indy)
+        if teams[0] == 1276:
+            prob = prob - 0.10
+        if teams[1] == 1276:
+            prob = prob + 0.10
 
         if prob < 0.64 and prob > 0.36:
             r = random.randint(0, 1)
@@ -139,12 +143,6 @@ def generateSample(feature_cols, from_indy=False):
             prob = 0.95
         elif prob <= 0.05:
             prob = 0.05
-        elif teams[0] == 1276:
-            prob = prob - 0.10
-        elif teams[1] == 1276:
-            prob = prob + 0.10
-        elif luck > 0:
-            prob = prob + 0.05
         else:
             prob = prob
 
@@ -154,7 +152,7 @@ def generateSample(feature_cols, from_indy=False):
         result_ls.append(d)
 
     results = pd.DataFrame(result_ls)
-    results.to_csv("homeproxyluckboost_results_step2.csv", index=False)
+    results.to_csv("baseline_results_step2.csv", index=False)
     return results
 
 def sim_winner(teamA, teamB, df):
@@ -170,18 +168,13 @@ def sim_winner(teamA, teamB, df):
         return low
 
 def simulation(df):
-    print("-----Simulate Pre-Round Seeds-----")
-    west_sixteen = sim_winner(1111, 1313, df)          # NORF vs App St
-    west_eleven = sim_winner(1179, 1455, df)           # Drake vs Wichita St
-    east_sixteen = sim_winner(1291, 1411, df)          # Mt St Mary vs TX Southern
-    east_eleven = sim_winner(1277, 1417, df)           # Michigan St vs UCLA
     print("-----Simulate First Round-----")
     print("WEST")
-    west_32_a = sim_winner(1211, west_sixteen, df)     # Gonzaga vs NORF/APP
+    west_32_a = sim_winner(1211, 1313, df)             # Gonzaga vs NORF
     west_32_b = sim_winner(1328, 1281, df)             # Oklahoma vs Missouri
     west_32_c = sim_winner(1166, 1364, df)             # Creighton vs UCSB
     west_32_d = sim_winner(1438, 1325, df)             # Virginia vs Ohio
-    west_32_e = sim_winner(1425, west_eleven, df)      # USC vs WICH/DRKE
+    west_32_e = sim_winner(1425, 1179, df)             # USC vs DRKE
     west_32_f = sim_winner(1242, 1186, df)             # Kansas vs E Washington
     west_32_g = sim_winner(1332, 1433, df)             # Oregon vs VCU
     west_32_h = sim_winner(1234, 1213, df)             # Iowa vs Grand Canyon
@@ -195,11 +188,11 @@ def simulation(df):
     south_32_g = sim_winner(1196, 1439, df)            # Florida vs Virginia Tech
     south_32_h = sim_winner(1326, 1331, df)            # Ohio St vs Oral Roberts
     print("EAST")
-    east_32_a = sim_winner(1276, east_sixteen, df)     # Michigan vs MSM/TXSO
+    east_32_a = sim_winner(1276, 1411, df)             # Michigan vs TXSO
     east_32_b = sim_winner(1261, 1382, df)             # LSU vs St Bonaventure
     east_32_c = sim_winner(1160, 1207, df)             # Colorado vs Georgetown
     east_32_d = sim_winner(1199, 1422, df)             # Florida St vs UNC Greensboro
-    east_32_e = sim_winner(1140, east_eleven, df)      # BYU vs MSU/UCLA
+    east_32_e = sim_winner(1140, 1417, df)             # BYU vs UCLA
     east_32_f = sim_winner(1400, 1101, df)             # Texas vs Abil Christian
     east_32_g = sim_winner(1163, 1268, df)             # UConn vs Maryland
     east_32_h = sim_winner(1104, 1233, df)             # Alabama vs Iona
